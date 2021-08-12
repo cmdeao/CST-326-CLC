@@ -8,6 +8,7 @@ namespace CST_326_CLC.Controllers
 {
     public class HomeController : Controller
     {
+        //testing branch
         public ActionResult Index()
         {
             return View();
