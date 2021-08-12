@@ -10,6 +10,7 @@ namespace CST_326_CLC.Controllers
     {
         public ActionResult Index()
         {
+            //This is a test comment.
             return View();
         }
 
