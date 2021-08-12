@@ -12,7 +12,7 @@ namespace CST_326_CLC.Controllers
         {
             return View();
         }
-
+        //Yo test
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
