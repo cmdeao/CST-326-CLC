@@ -9,6 +9,7 @@ using System.Data.SqlClient;
 using System.Web.Configuration;
 using System.Diagnostics;
 using System.Security.Cryptography;
+using CST_326_CLC.Services.Business;
 
 namespace CST_326_CLC.Services.Data
 {
@@ -95,9 +96,7 @@ namespace CST_326_CLC.Services.Data
             command.Parameters.Add(new SqlParameter("@phone", SqlDbType.VarChar, 15)).Value = user.phone;
             command.Parameters.Add(new SqlParameter("@email", SqlDbType.VarChar, 50)).Value = user.email;
             command.Parameters.Add(new SqlParameter("@username", SqlDbType.VarChar, 50)).Value = user.username;
-
-            command.Parameters.Add(new SqlParameter("@password", SqlDbType.VarChar, 50)).Value = Hash(user.password);
-
+            command.Parameters.Add(new SqlParameter("@password", SqlDbType.VarChar, 100)).Value = Hash(user.password);
             command.Parameters.Add(new SqlParameter("@business", SqlDbType.TinyInt)).Value = user.isBusinessAccount;
             command.Parameters.Add(new SqlParameter("@admin", SqlDbType.TinyInt)).Value = user.isAdmin;
 
@@ -145,6 +144,61 @@ namespace CST_326_CLC.Services.Data
                 }
             }
             return true;
+        }
+    
+        public bool AuthenticateUser(LoginModel user)
+        {
+            string query = "SELECT * FROM dbo.Users WHERE username = @Username";
+            bool autenticatedUser = false;
+
+            SqlConnection conn = new SqlConnection(WebConfigurationManager.ConnectionStrings["myConn"].ConnectionString);
+            SqlCommand command = new SqlCommand(query, conn);
+
+            try
+            {
+                command.Parameters.Add("@Username", SqlDbType.VarChar, 50).Value = user.username;
+
+                conn.Open();
+
+                SqlDataReader reader = command.ExecuteReader();
+
+                if(reader.HasRows)
+                {
+                    while(reader.Read())
+                    {
+                        if(!VerifyHash(reader.GetString(6), user.password))
+                        {
+                            break;
+                        }
+                        else
+                        {
+                            UserModel loggedUser = new UserModel();
+                            loggedUser.userID = reader.GetInt32(0);
+                            loggedUser.firstName = reader.GetString(1);
+                            loggedUser.lastName = reader.GetString(2);
+                            loggedUser.phone = reader.GetString(3);
+                            loggedUser.email = reader.GetString(4);
+                            loggedUser.username = reader.GetString(5);
+                            int business = (int)reader.GetSqlByte(7);
+                            int admin = (int)reader.GetSqlByte(8);
+                            loggedUser.isBusinessAccount = Convert.ToBoolean(business);
+                            loggedUser.isAdmin = Convert.ToBoolean(admin);
+                            UserManagement.Instance._loggedUser = loggedUser;
+
+                            autenticatedUser = true;
+                        }
+                    }
+                }
+            }
+            catch (SqlException e)
+            {
+                Debug.WriteLine(String.Format("Error generated: {0} - {1}", e.GetType(), e.Message));
+            }
+            finally
+            {
+                conn.Close();
+            }
+            return autenticatedUser;
         }
     }
 }
