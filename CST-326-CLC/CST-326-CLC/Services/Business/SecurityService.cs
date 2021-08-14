@@ -27,6 +27,11 @@ namespace CST_326_CLC.Services.Business
         {
             return service.RegisterUser(model);
         }
+
+        public bool AuthenticateUser(LoginModel model)
+        {
+            return service.AuthenticateUser(model);
+        }
     }
 
     //Singleton to manage a logged in user.
@@ -38,6 +43,11 @@ namespace CST_326_CLC.Services.Business
         //_loggedUser is where a logged in user's information will be stored for access
         //from within the application.
         public UserModel _loggedUser { get; set; } = null;
+
+        public UserManagement()
+        {
+
+        }
 
         public static UserManagement Instance
         { 
