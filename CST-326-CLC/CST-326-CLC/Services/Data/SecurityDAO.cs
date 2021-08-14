@@ -179,7 +179,10 @@ namespace CST_326_CLC.Services.Data
                             loggedUser.phone = reader.GetString(3);
                             loggedUser.email = reader.GetString(4);
                             loggedUser.username = reader.GetString(5);
-
+                            int business = (int)reader.GetSqlByte(7);
+                            int admin = (int)reader.GetSqlByte(8);
+                            loggedUser.isBusinessAccount = Convert.ToBoolean(business);
+                            loggedUser.isAdmin = Convert.ToBoolean(admin);
                             UserManagement.Instance._loggedUser = loggedUser;
 
                             autenticatedUser = true;
