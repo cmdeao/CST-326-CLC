@@ -13,19 +13,5 @@ namespace CST_326_CLC.Controllers
         {
             return View();
         }
-        //Yo testsd
-        public ActionResult About()
-        {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
-        }
     }
 }

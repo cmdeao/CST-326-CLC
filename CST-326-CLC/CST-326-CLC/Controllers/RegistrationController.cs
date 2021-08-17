@@ -14,7 +14,7 @@ namespace CST_326_CLC.Controllers
         // GET: Registration
         public ActionResult Index()
         {
-            return View("TESTRegistration");
+            return View();
         }
 
         [HttpPost]
