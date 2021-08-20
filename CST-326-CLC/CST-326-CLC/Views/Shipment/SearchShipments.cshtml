@@ -1,0 +1,14 @@
+﻿
+@{
+    ViewBag.Title = "SearchShipments";
+}
+
+<h2>SearchShipments</h2>
+
+@using (Html.BeginForm("ViewShipment", "Shipment", FormMethod.Post))
+{
+    <label for="shipmentID">Shipment ID:</label>
+    <input type="number" id="shipmentID" name="shipmentID" />
+    <br />
+    <input type="submit" value="Search" class="btn btn-default" />
+}
