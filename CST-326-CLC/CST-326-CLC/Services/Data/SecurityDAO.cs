@@ -32,7 +32,6 @@ namespace CST_326_CLC.Services.Data
                 if(reader.HasRows)
                 {
                     reader.Close();
-                    conn.Close();
                     return true;
                 }
             }
@@ -63,7 +62,6 @@ namespace CST_326_CLC.Services.Data
                 if(reader.HasRows)
                 {
                     reader.Close();
-                    conn.Close();
                     return true;
                 }
             }
@@ -104,14 +102,7 @@ namespace CST_326_CLC.Services.Data
 
             retValue = command.ExecuteNonQuery();
 
-            if (retValue == 0)
-            {
-                return false;
-            }
-            else
-            {
-                return true;
-            }
+            return Convert.ToBoolean(retValue);
         }
 
         public static string Hash(string password)

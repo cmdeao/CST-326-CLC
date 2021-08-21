@@ -46,7 +46,6 @@ namespace CST_326_CLC.Services.Data
                         int residential = (int)reader.GetSqlByte(12);
                         retrievedModel.IsResidential = Convert.ToBoolean(residential);
 
-                        conn.Close();
                         return retrievedModel;
                     }
                 }
@@ -65,8 +64,8 @@ namespace CST_326_CLC.Services.Data
         public bool CreateShipment(ShipmentModel model)
         {
             int operationSuccess = 0;
-            string query = "INSERT INTO dbo.Shipment(Shipment_ID, User_ID, Address_ID, Status, PackageSize, Weight, " +
-                "Height, Width, Length, Zip_Code, Packaging, Delivery_Options, Is_Residential) VALUES (@shipmentID, @userID, @addressID, @status, " +
+            string query = "INSERT INTO dbo.Shipment(User_ID, Address_ID, Status, PackageSize, Weight, " +
+                "Height, Width, Length, Zip_Code, Packaging, Delivery_Options, Is_Residential) VALUES (@userID, @addressID, @status, " +
                 "@packageSize, @weight, @height, @width, @length, @zip, @packaging, @delivery, @residential)";
 
             SqlConnection conn = new SqlConnection(WebConfigurationManager.ConnectionStrings["myConn"].ConnectionString);
@@ -75,15 +74,18 @@ namespace CST_326_CLC.Services.Data
             try
             {
                 conn.Open();
-
-                command.Parameters.Add("@shipmentID", SqlDbType.Int).Value = model.ShipmentId;
-
-                //This line will be changed to insert the appropriate user ID for the foreign key, currently it will insert
-                //the logged user's ID into the table for testing.
-                command.Parameters.Add("@userID", SqlDbType.Int).Value = 2003;
+                if(UserManagement.Instance._loggedUser == null)
+                {
+                    command.Parameters.Add("@userID", SqlDbType.Int).Value = 3005;
+                }
+                else
+                {
+                    command.Parameters.Add("@userID", SqlDbType.Int).Value = UserManagement.Instance._loggedUser.userID;
+                }
 
                 //Currently inserting a test value for Address_ID
                 command.Parameters.Add("@addressID", SqlDbType.Int).Value = 987654;
+
                 command.Parameters.Add("@status", SqlDbType.VarChar, 50).Value = model.Status;
                 command.Parameters.Add("@packageSize", SqlDbType.VarChar, 50).Value = model.PackageSize;
                 command.Parameters.Add("@weight", SqlDbType.Int).Value = model.Weight;
@@ -98,15 +100,7 @@ namespace CST_326_CLC.Services.Data
                 command.Prepare();
 
                 operationSuccess = command.ExecuteNonQuery();
-
-                if (operationSuccess == 0)
-                {
-                    return false;
-                }
-                else
-                {
-                    return true;
-                }
+                return Convert.ToBoolean(operationSuccess);
             }
             catch (SqlException e)
             {
@@ -130,7 +124,6 @@ namespace CST_326_CLC.Services.Data
                 conn.Open();
                 command.Parameters.Add("@ShipmentID", SqlDbType.Int).Value = shipmentID;
                 command.ExecuteNonQuery();
-                conn.Close();
                 return true;
             }
             catch (SqlException e)

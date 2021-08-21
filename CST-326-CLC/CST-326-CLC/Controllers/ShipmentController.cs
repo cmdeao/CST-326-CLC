@@ -13,7 +13,7 @@ namespace CST_326_CLC.Controllers
         // GET: Shipment
         public ActionResult Index()
         {
-            return View("SearchShipments");
+            return View("ShipmentIndexTEST");
         }
 
         [HttpPost]
