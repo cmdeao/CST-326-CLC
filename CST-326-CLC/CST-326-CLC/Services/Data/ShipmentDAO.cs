@@ -8,6 +8,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Web;
 using System.Web.Configuration;
+using Serilog;
 
 namespace CST_326_CLC.Services.Data
 {
@@ -15,6 +16,7 @@ namespace CST_326_CLC.Services.Data
     {
         public ShipmentModel RetrieveShipment(int shipmentID)
         {
+            Log.Information("ShipmentDAO: Retrieving shipment from database with shipmentID: {0}", shipmentID);
             string query = "SELECT * FROM dbo.Shipment WHERE Shipment_ID = @Shipment_ID";
 
             SqlConnection conn = new SqlConnection(WebConfigurationManager.ConnectionStrings["myConn"].ConnectionString);
@@ -46,12 +48,14 @@ namespace CST_326_CLC.Services.Data
                         int residential = (int)reader.GetSqlByte(12);
                         retrievedModel.IsResidential = Convert.ToBoolean(residential);
 
+                        Log.Information("ShipmentDAO: ShipmentID: {0} retrieved successfully.", shipmentID);
                         return retrievedModel;
                     }
                 }
             }
             catch (SqlException e)
             {
+                Log.Information("ShipmentDAO: There was an SQL exception when retrieving shipmentID: {0}", shipmentID);
                 Debug.WriteLine(String.Format("Error generated: {0} - {1}", e.GetType(), e.Message));
             }
             finally
@@ -63,6 +67,8 @@ namespace CST_326_CLC.Services.Data
 
         public bool CreateShipment(ShipmentModel model)
         {
+            Log.Information("ShipmentDAO: Creating new shipment in the database");
+
             int operationSuccess = 0;
             string query = "INSERT INTO dbo.Shipment(User_ID, Address_ID, Status, PackageSize, Weight, " +
                 "Height, Width, Length, Zip_Code, Packaging, Delivery_Options, Is_Residential) VALUES (@userID, @addressID, @status, " +
@@ -104,6 +110,7 @@ namespace CST_326_CLC.Services.Data
             }
             catch (SqlException e)
             {
+                Log.Information("ShipmentDAO: There was an SQL exception when creating a new shipment in the database.");
                 Debug.WriteLine(String.Format("Error generated: {0} - {1}", e.GetType(), e.Message));
             }
             finally
@@ -115,6 +122,8 @@ namespace CST_326_CLC.Services.Data
 
         public bool DeleteShipment(int shipmentID)
         {
+            Log.Information("ShipmentDAO: Deleting shipment: {0} in the database", shipmentID);
+
             string query = "DELETE FROM dbo.Shipment WHERE Shipment_ID = @ShipmentID";
             SqlConnection conn = new SqlConnection(WebConfigurationManager.ConnectionStrings["myConn"].ConnectionString);
             SqlCommand command = new SqlCommand(query, conn);
@@ -124,10 +133,14 @@ namespace CST_326_CLC.Services.Data
                 conn.Open();
                 command.Parameters.Add("@ShipmentID", SqlDbType.Int).Value = shipmentID;
                 command.ExecuteNonQuery();
+
+                Log.Information("ShipmentDAO: Successfully Deleted shipment: {0} from the database", shipmentID);
+
                 return true;
             }
             catch (SqlException e)
             {
+                Log.Information("ShipmentDAO: There was an SQL exception when deleting a new shipment in the database.");
                 Debug.WriteLine(String.Format("Error generated: {0} - {1}", e.GetType(), e.Message));
             }
             finally

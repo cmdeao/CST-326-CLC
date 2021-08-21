@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Serilog;
 
 namespace CST_326_CLC.Controllers
 {
@@ -13,14 +14,20 @@ namespace CST_326_CLC.Controllers
         // GET: Login
         public ActionResult Index()
         {
+            Log.Information("Navigating to Login page.");
+
             return View("LoginTEST");
         }
 
         [HttpPost]
         public ActionResult Login(LoginModel model)
         {
+            Log.Information("Login attempted...");
+
             if(!ModelState.IsValid)
             {
+                Log.Information("Login: Login Failed. ModelState was invalid.");
+
                 return View("LoginTEST");
             }
 
@@ -28,10 +35,12 @@ namespace CST_326_CLC.Controllers
 
             if(service.AuthenticateUser(model))
             {
+                Log.Information("Login: Login Succeeded. User data was correct.");
                 return Content("You've logged into the application!");
             }
             else
             {
+                Log.Information("Login: Login Failed. User data was incorect.");
                 return Content("You've failed to login!");
             }
         }
