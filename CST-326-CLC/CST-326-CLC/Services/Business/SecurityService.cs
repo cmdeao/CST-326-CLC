@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using Serilog;
 
 namespace CST_326_CLC.Services.Business
 {
@@ -15,21 +16,25 @@ namespace CST_326_CLC.Services.Business
         //registered within the application's persistent database.
         public bool CheckUser(string username)
         {
+            Log.Information("SecurityService: Checking user {0}", username);
             return service.CheckUsername(username);
         }
 
         public bool CheckEmail(string email)
         {
+            Log.Information("SecurityService: Checking email {0}", email);
             return service.CheckEmail(email);
         }
 
         public bool RegisterUser(UserModel model)
         {
+            Log.Information("SecurityService: Registering user: {0}", model.username);
             return service.RegisterUser(model);
         }
 
         public bool AuthenticateUser(LoginModel model)
         {
+            Log.Information("SecurityService: Authenticating user {0}", model.username);
             return service.AuthenticateUser(model);
         }
     }
@@ -68,6 +73,7 @@ namespace CST_326_CLC.Services.Business
         //Method to log the user out of the application.
         public void LogOut()
         {
+            Log.Information("UserManagement: Logged out user.");
             //Setting the Singleton instance variable to null.
             _loggedUser = null;
         }

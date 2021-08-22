@@ -10,6 +10,7 @@ using System.Web.Configuration;
 using System.Diagnostics;
 using System.Security.Cryptography;
 using CST_326_CLC.Services.Business;
+using Serilog;
 
 namespace CST_326_CLC.Services.Data
 {
@@ -17,6 +18,7 @@ namespace CST_326_CLC.Services.Data
     {
         public bool CheckUsername(string username)
         {
+            Log.Information("SecurityDAO: Checking username: {0} against the database", username);
             string query = "SELECT * FROM dbo.Users WHERE username = @Username";
 
             SqlConnection conn = new SqlConnection(WebConfigurationManager.ConnectionStrings["myConn"].ConnectionString);
@@ -31,13 +33,14 @@ namespace CST_326_CLC.Services.Data
 
                 if(reader.HasRows)
                 {
+                    Log.Information("SecurityDAO: Successfully found username: {0}", username);
                     reader.Close();
-                    conn.Close();
                     return true;
                 }
             }
             catch(SqlException e)
             {
+                Log.Information("SecurityDAO: There was an SQL excecption when checking username: {0}", username);
                 Debug.WriteLine(String.Format("Error generated: {0} - {1}", e.GetType(), e.Message));
             }
             finally
@@ -49,6 +52,8 @@ namespace CST_326_CLC.Services.Data
 
         public bool CheckEmail(string email)
         {
+            Log.Information("SecurityDAO: Checking user email: {0} against the database", email);
+
             string query = "SELECT * FROM dbo.Users WHERE email = @Email";
             SqlConnection conn = new SqlConnection(WebConfigurationManager.ConnectionStrings["myConn"].ConnectionString);
             SqlCommand command = new SqlCommand(query, conn);
@@ -62,13 +67,14 @@ namespace CST_326_CLC.Services.Data
 
                 if(reader.HasRows)
                 {
+                    Log.Information("SecurityDAO: Successfully found user email: {0}", email);
                     reader.Close();
-                    conn.Close();
                     return true;
                 }
             }
             catch (SqlException e)
             {
+                Log.Information("SecurityDAO: There was an SQL excecption when checking for user email: {0}", email);
                 Debug.WriteLine(String.Format("Error generated: {0} - {1}", e.GetType(), e.Message));
             }
             finally
@@ -80,6 +86,8 @@ namespace CST_326_CLC.Services.Data
 
         public bool RegisterUser(UserModel user)
         {
+            Log.Information("SecurityDAO: Registering new user to database");
+
             int retValue = 0;
             
             SqlConnection conn = new SqlConnection(WebConfigurationManager.ConnectionStrings["myConn"].ConnectionString);
@@ -104,18 +112,12 @@ namespace CST_326_CLC.Services.Data
 
             retValue = command.ExecuteNonQuery();
 
-            if (retValue == 0)
-            {
-                return false;
-            }
-            else
-            {
-                return true;
-            }
+            return Convert.ToBoolean(retValue);
         }
 
         public static string Hash(string password)
         {
+            Log.Information("SecurityDAO: Hashing password");
             byte[] salt;
             new RNGCryptoServiceProvider().GetBytes(salt = new byte[20]);
             var pbkdf2 = new Rfc2898DeriveBytes(password, salt, 10000);
@@ -129,6 +131,7 @@ namespace CST_326_CLC.Services.Data
 
         public bool VerifyHash(string hashPass, string password)
         {
+            Log.Information("SecurityDAO: Verifing hashed password");
             byte[] hashBytes = Convert.FromBase64String(hashPass);
             byte[] salt = new byte[20];
             Array.Copy(hashBytes, 0, salt, 0, 20);
@@ -143,11 +146,14 @@ namespace CST_326_CLC.Services.Data
                     throw new UnauthorizedAccessException();
                 }
             }
+            Log.Information("SecurityDAO: Hashed password verified.");
             return true;
         }
     
         public bool AuthenticateUser(LoginModel user)
         {
+            Log.Information("SecurityDAO: Authenticating user against database");
+
             string query = "SELECT * FROM dbo.Users WHERE username = @Username";
             bool autenticatedUser = false;
 

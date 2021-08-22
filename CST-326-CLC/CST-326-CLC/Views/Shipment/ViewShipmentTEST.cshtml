@@ -1,0 +1,106 @@
+﻿@model CST_326_CLC.Models.ShipmentModel
+
+@{
+    ViewBag.Title = "ViewShipmentTEST";
+}
+
+<h2>ViewShipmentTEST</h2>
+
+<div>
+    <h4>ShipmentModel</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ShipmentId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ShipmentId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Status)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Status)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PackageSize)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PackageSize)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Weight)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Weight)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Height)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Height)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Width)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Width)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Length)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Length)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Zip)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Zip)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PackagingType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PackagingType)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DeliveryOption)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DeliveryOption)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsResidential)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsResidential)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
