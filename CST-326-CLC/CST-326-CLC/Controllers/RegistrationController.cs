@@ -16,8 +16,7 @@ namespace CST_326_CLC.Controllers
         public ActionResult Index()
         {
             Log.Information("Navigating to Registration Page.");
-
-            return View("TESTRegistration");
+            return View();
         }
 
         [HttpPost]
