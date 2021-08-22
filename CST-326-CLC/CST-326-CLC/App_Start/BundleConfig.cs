@@ -1,5 +1,6 @@
 ﻿using System.Web;
 using System.Web.Optimization;
+using Serilog;
 
 namespace CST_326_CLC
 {
@@ -8,6 +9,8 @@ namespace CST_326_CLC
         // For more information on bundling, visit https://go.microsoft.com/fwlink/?LinkId=301862
         public static void RegisterBundles(BundleCollection bundles)
         {
+            Log.Information("Registering Bundles...");
+
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
                         "~/Scripts/jquery-{version}.js"));
 
@@ -25,6 +28,8 @@ namespace CST_326_CLC
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/site.css"));
+
+            Log.Information("Bundles registered");
         }
     }
 }

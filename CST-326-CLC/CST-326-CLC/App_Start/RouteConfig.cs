@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
+using Serilog;
 
 namespace CST_326_CLC
 {
@@ -11,6 +12,8 @@ namespace CST_326_CLC
     {
         public static void RegisterRoutes(RouteCollection routes)
         {
+            Log.Information("Registering Routes...");
+
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
@@ -20,6 +23,8 @@ namespace CST_326_CLC
             );
 
             routes.MapRoute("defaults", "{controller}/{action}/{id}", new { id = UrlParameter.Optional });
+
+            Log.Information("Routes registered.");
         }
     }
 }
