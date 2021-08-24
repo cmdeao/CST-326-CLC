@@ -26,7 +26,7 @@ namespace CST_326_CLC.Services.Business
             return service.CheckEmail(email);
         }
 
-        public bool RegisterUser(UserModel model)
+        public bool RegisterUser(PersonalUserModel model)
         {
             Log.Information("SecurityService: Registering user: {0}", model.username);
             return service.RegisterUser(model);
@@ -48,6 +48,7 @@ namespace CST_326_CLC.Services.Business
         //_loggedUser is where a logged in user's information will be stored for access
         //from within the application.
         public UserModel _loggedUser { get; set; } = null;
+        public PersonalUserModel _registrationUser { get; set; } = null;
 
         public UserManagement()
         {
@@ -76,6 +77,11 @@ namespace CST_326_CLC.Services.Business
             Log.Information("UserManagement: Logged out user.");
             //Setting the Singleton instance variable to null.
             _loggedUser = null;
+        }
+
+        public void ClearRegistration()
+        {
+            _registrationUser = null;
         }
     }
 }

@@ -84,7 +84,7 @@ namespace CST_326_CLC.Services.Data
             return false;
         }
 
-        public bool RegisterUser(UserModel user)
+        public bool RegisterUser(PersonalUserModel user)
         {
             Log.Information("SecurityDAO: Registering new user to database");
 
@@ -94,13 +94,30 @@ namespace CST_326_CLC.Services.Data
 
             conn.Open();
 
-            string query = "INSERT INTO dbo.Users(first_name, last_name, phone, email, username, password, isBusinessAccount, isAdmin) " +
-                "VALUES(@fName, @lName, @phone, @email, @username, @password, @business, @admin)";
+            //string query = "INSERT INTO dbo.Users(first_name, last_name, phone, email, username, password, isBusinessAccount, isAdmin) " +
+            //    "VALUES(@fName, @lName, @phone, @email, @username, @password, @business, @admin)";
+
+            string query = "INSERT INTO dbo.Users(first_name, last_name, address, apartment_suite, city, state, zipcode, country, phone, email, username," +
+                " password, isBusinessAccount, isAdmin) VALUES(@fName, @lName, @address, @apartment, @city, @state, @zip, @country, @phone, @email, @username," +
+                " @password, @business, @admin)";
 
             SqlCommand command = new SqlCommand(query, conn);
 
             command.Parameters.Add(new SqlParameter("@fName", SqlDbType.VarChar, 25)).Value = user.firstName;
             command.Parameters.Add(new SqlParameter("@lName", SqlDbType.VarChar, 25)).Value = user.lastName;
+            command.Parameters.Add(new SqlParameter("@address", SqlDbType.VarChar, 100)).Value = user.address;
+            if (user.apartmentSuite != null)
+            {
+                command.Parameters.Add(new SqlParameter("@apartment", SqlDbType.VarChar, 25)).Value = user.apartmentSuite;
+            }
+            else
+            {
+                command.Parameters.Add(new SqlParameter("@apartment", SqlDbType.VarChar, 25)).Value = DBNull.Value;
+            }
+            command.Parameters.Add(new SqlParameter("@city", SqlDbType.VarChar, 50)).Value = user.city;
+            command.Parameters.Add(new SqlParameter("@state", SqlDbType.VarChar, 25)).Value = user.state;
+            command.Parameters.Add(new SqlParameter("@zip", SqlDbType.Int)).Value = user.zipCode;
+            command.Parameters.Add(new SqlParameter("@country", SqlDbType.VarChar, 25)).Value = user.country;
             command.Parameters.Add(new SqlParameter("@phone", SqlDbType.VarChar, 15)).Value = user.phone;
             command.Parameters.Add(new SqlParameter("@email", SqlDbType.VarChar, 50)).Value = user.email;
             command.Parameters.Add(new SqlParameter("@username", SqlDbType.VarChar, 50)).Value = user.username;
@@ -149,7 +166,7 @@ namespace CST_326_CLC.Services.Data
             Log.Information("SecurityDAO: Hashed password verified.");
             return true;
         }
-    
+
         public bool AuthenticateUser(LoginModel user)
         {
             Log.Information("SecurityDAO: Authenticating user against database");
@@ -172,8 +189,9 @@ namespace CST_326_CLC.Services.Data
                 {
                     while(reader.Read())
                     {
-                        if(!VerifyHash(reader.GetString(6), user.password))
+                        if(!VerifyHash(reader.GetString(12), user.password))
                         {
+                            autenticatedUser = false;
                             break;
                         }
                         else
@@ -182,11 +200,11 @@ namespace CST_326_CLC.Services.Data
                             loggedUser.userID = reader.GetInt32(0);
                             loggedUser.firstName = reader.GetString(1);
                             loggedUser.lastName = reader.GetString(2);
-                            loggedUser.phone = reader.GetString(3);
-                            loggedUser.email = reader.GetString(4);
-                            loggedUser.username = reader.GetString(5);
-                            int business = (int)reader.GetSqlByte(7);
-                            int admin = (int)reader.GetSqlByte(8);
+                            loggedUser.phone = reader.GetString(9);
+                            loggedUser.email = reader.GetString(10);
+                            loggedUser.username = reader.GetString(11);
+                            int business = (int)reader.GetSqlByte(13);
+                            int admin = (int)reader.GetSqlByte(14);
                             loggedUser.isBusinessAccount = Convert.ToBoolean(business);
                             loggedUser.isAdmin = Convert.ToBoolean(admin);
                             UserManagement.Instance._loggedUser = loggedUser;

@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Serilog;
+using System.Diagnostics;
 
 namespace CST_326_CLC.Controllers
 {
@@ -16,32 +17,33 @@ namespace CST_326_CLC.Controllers
         {
             Log.Information("Navigating to Login page.");
 
-            return View("LoginTEST");
+            return View();
         }
 
         [HttpPost]
-        public ActionResult Login(LoginModel model)
+        public ActionResult Login(string username, string password)
         {
-            Log.Information("Login attempted...");
-
-            if(!ModelState.IsValid)
+            if(String.IsNullOrWhiteSpace(username) )
             {
-                Log.Information("Login: Login Failed. ModelState was invalid.");
-
-                return View("LoginTEST");
+                return RedirectToAction("Index", "Registration");
+            }
+            if(String.IsNullOrWhiteSpace(password))
+            {
+                return RedirectToAction("Index", "Registration");
             }
 
             SecurityService service = new SecurityService();
 
-            if(service.AuthenticateUser(model))
+            LoginModel login = new LoginModel();
+            login.username = username;
+            login.password = password;
+            if (service.AuthenticateUser(login))
             {
-                Log.Information("Login: Login Succeeded. User data was correct.");
-                return Content("You've logged into the application!");
+                return Content("You've logged in!");
             }
             else
             {
-                Log.Information("Login: Login Failed. User data was incorect.");
-                return Content("You've failed to login!");
+                return Content("Failed to login!");
             }
         }
     }

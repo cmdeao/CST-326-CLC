@@ -32,7 +32,6 @@
 
             </ul>
 
-
             
             <div class="col-md-3 text-end dropdown">
                 <button class="btn btn-white dropdown-toggle" type="button" id="dropdownMenuButton"
@@ -40,26 +39,22 @@
                     Login / Signup
                 </button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    @using (Html.BeginForm("Login", "Login", FormMethod.Post))
-                    {
-                        <form class="p-4 text-center">
-                            <div class="mb-3">
-                                <label class="form-label">Username</label>
-                                <input type="text" id="username" name="username" class="form-control" placeholder="Username">
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label">Password</label>
-                                <input type="password" id="password" name="password" class="form-control" placeholder="Password">
-                            </div>
-                            <button type="submit" class="btn btn-primary">Sign in</button>
-                        </form>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item text-center" href="~/Registration">No Account? Sign up</a>
-                        <a class="dropdown-item text-center" href="#">Forgot password?</a>
-                    }
-                    </div>
+                    <form class="p-4 text-center">
+                        <div class="mb-3">
+                            <label class="form-label">Username</label>
+                            <input type="text" class="form-control" placeholder="Username">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Password</label>
+                            <input type="password" class="form-control" placeholder="Password">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Sign in</button>
+                    </form>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item text-center" href="~/Registration">No Account? Sign up</a>
+                    <a class="dropdown-item text-center" href="#">Forgot password?</a>
+                </div>
             </div>
-            
         </header>
     </div>
     <div class="container">

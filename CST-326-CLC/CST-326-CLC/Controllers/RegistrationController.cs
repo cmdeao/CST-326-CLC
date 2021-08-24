@@ -7,6 +7,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Serilog;
+using System.Globalization;
+using Newtonsoft.Json;
 
 namespace CST_326_CLC.Controllers
 {
@@ -19,43 +21,70 @@ namespace CST_326_CLC.Controllers
             return View();
         }
 
-        [HttpPost]
-        public ActionResult RegisterAccount(UserModel model)
+        public ActionResult Personal()
         {
-            Log.Information("Attempting to register a new user...");
+            return View("Personal");
+        }
+
+        public ActionResult Business()
+        {
+            return View("Business");
+        }
+
+        [HttpPost]
+        public ActionResult Step3(PersonalUserModel model, string userState)
+        {
+            SecurityService service = new SecurityService();
+
+            if(service.CheckEmail(model.email))
+            {
+                ModelState.AddModelError("email", "Please enter a valid email.");
+                return View("Personal");
+            }
+
+            model.state = userState;
+            model.isAdmin = false;
+            model.isBusinessAccount = false;
+            if (!ModelState.IsValid)
+            {
+                
+                return View("Personal");
+            }
+
+            UserManagement.Instance._registrationUser = model;
+
+            return View("Step3");
+        }
+
+        [HttpPost]
+        public ActionResult Registration(PersonalCredsModel creds)
+        {
+            PersonalUserModel regModel = UserManagement.Instance._registrationUser;
+
+            if(!ModelState.IsValid || creds.password != creds.confirmPass)
+            {
+                ModelState.AddModelError("password", "Please ensure both password inputs match.");
+                return View("Step3");
+            }
+
+            regModel.username = creds.username;
+            regModel.password = creds.password;
 
             SecurityService service = new SecurityService();
             
-            if (service.CheckEmail(model.email))
+            if(service.CheckUser(regModel.username))
             {
-                Log.Information("Registration: User entered an invalid email.");
-                ModelState.AddModelError("email", "Please enter a valid email.");
-            }
-
-            if(service.CheckUser(model.username))
-            {
-                Log.Information("Registration: User entered an invalid username.");
                 ModelState.AddModelError("username", "Please enter a valid username.");
+                return View("Step3");
             }
 
-            if (!ModelState.IsValid)
+            if (service.RegisterUser(regModel))
             {
-                Log.Information("Registration: User entered an invalid registration details.");
-                return View("TESTRegistration");
-            }
-
-            model.isBusinessAccount = false;
-            model.isAdmin = false;
-
-            if(service.RegisterUser(model))
-            {
-                Log.Information("Registration: User successfully registered.");
-                return Content("You've created your account!");
+                return Content("You've created an account!");
             }
             else
             {
-                Log.Information("Registration: Registration failed.");
-                return Content("Something went wrong! Try again later!");
+                return View("Error");
             }
         }
     }

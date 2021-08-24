@@ -146,6 +146,8 @@
     </Compile>
     <Compile Include="Models\AddressModel.cs" />
     <Compile Include="Models\LoginModel.cs" />
+    <Compile Include="Models\PersonalCredsModel.cs" />
+    <Compile Include="Models\PersonalUserModel.cs" />
     <Compile Include="Models\ShipmentModel.cs" />
     <Compile Include="Models\UserModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -186,13 +188,17 @@
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
-    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Shared\_LayoutORIGINAL.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Registration\TESTRegistration.cshtml" />
     <Content Include="Views\Login\LoginTEST.cshtml" />
     <Content Include="Views\Shipment\ShipmentIndexTEST.cshtml" />
     <Content Include="Views\Shipment\ViewShipmentTEST.cshtml" />
     <Content Include="Views\Shipment\SearchShipments.cshtml" />
+    <Content Include="Views\Registration\IndexTest.cshtml" />
+    <Content Include="Views\Registration\Personal.cshtml" />
+    <Content Include="Views\Registration\Step3.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
