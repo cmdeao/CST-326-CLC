@@ -1,5 +1,3 @@
-﻿@model CST_326_CLC.Models.BusinessModel
-
 @{
     ViewData["Title"] = "Business Registration";
 }
@@ -25,49 +23,37 @@
     </div>
 </div>
 <div class="container text-center">
-    @using (Html.BeginForm("BusinessStep3", "Registration", FormMethod.Post))
-    {
-        @Html.AntiForgeryToken();
     <form class="form-floating">
         <div class="form-floating mb-3">
-            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-
-
-            @Html.EditorFor(model => model.firstName, new { htmlAttributes = new { @class = "form-control", @placeholder = "First Name" } })
-            @Html.ValidationMessageFor(model => model.firstName, "", new { @class = "text-danger" })
+            <input type="text" class="form-control" id="floatingInput" placeholder="First Name">
             <label for="floatingInput">First Name</label>
         </div>
         <div class="form-floating mb-3">
-            @Html.EditorFor(model => model.lastName, new { htmlAttributes = new { @class = "form-control", @placeholder = "Last Name" } })
-            @Html.ValidationMessageFor(model => model.lastName, "", new { @class = "text-danger" })
+            <input type="text" class="form-control" id="floatingInput" placeholder="Last Name">
             <label for="floatingInput">Last Name</label>
         </div>
         <div class="form-floating mb-3">
-            @Html.EditorFor(model => model.companyName, new { htmlAttributes = new { @class = "form-control", @placeholder = "Company Name" } })
-            @Html.ValidationMessageFor(model => model.companyName, "", new { @class = "text-danger" })
+            <input type="text" class="form-control" id="floatingInput" placeholder="Company Name">
             <label for="floatingInput">Company Name</label>
         </div>
         <div class="form-floating mb-3">
-            @Html.EditorFor(model => model.companyAddress, new { htmlAttributes = new { @class = "form-control", @placeholder = "Company Address" } })
-            @Html.ValidationMessageFor(model => model.companyAddress, "", new { @class = "text-danger" })
+            <input type="text" class="form-control" id="floatingInput" placeholder="Company Address">
             <label for="floatingInput">Company Address</label>
         </div>
         <div class="form-floating mb-3">
-            @Html.EditorFor(model => model.suite, new { htmlAttributes = new { @class = "form-control", @placeholder = "Apt/Suite (Optional)" } })
-            @Html.ValidationMessageFor(model => model.suite, "", new { @class = "text-danger" })
+            <input type="text" class="form-control" id="floatingInput" placeholder="Apt/ Suite (Optional)">
             <label for="floatingInput">Apt/ Suite (Optional)</label>
         </div>
         <div class="row">
             <div class="col-4">
                 <div class="form-floating mb-3">
-                    @Html.EditorFor(model => model.city, new { htmlAttributes = new { @class = "form-control", @placeholder = "City" } })
-                    @Html.ValidationMessageFor(model => model.city, "", new { @class = "text-danger" })
+                    <input type="text" class="form-control" id="floatingInput" placeholder="City">
                     <label for="floatingInput">City</label>
                 </div>
             </div>
             <div class="col-5">
                 <div class="form-floating mb-3">
-                    <select class="form-select" id="companyState" name="companyState" required>
+                    <select class="form-select">
                         <option disabled selected>State</option>
                         <option value="AL">Alabama (AL)</option>
                         <option value="AK">Alaska (AK)</option>
@@ -126,37 +112,27 @@
             </div>
             <div class="col-3">
                 <div class="form-floating mb-3">
-                    @Html.EditorFor(model => model.zipCode, new { htmlAttributes = new { @class = "form-control", @placeholder = "Zip Code" } })
-                    @Html.ValidationMessageFor(model => model.zipCode, "", new { @class = "text-danger" })
+                    <input type="text" class="form-control" id="floatingInput" placeholder="Zip Code">
                     <label for="floatingInput">Zip Code</label>
                 </div>
             </div>
         </div>
         <div class="form-floating mb-3">
-            @Html.EditorFor(model => model.country, new { htmlAttributes = new { @class = "form-control", @placeholder = "Country / Territory" } })
-            @Html.ValidationMessageFor(model => model.country, "", new { @class = "text-danger" })
+            <input type="text" class="form-control" id="floatingInput" placeholder="Country / Territory">
             <label for="floatingInput">Country / Territory</label>
         </div>
         <span class="input-group-text" id="basic-addon1">Country Code: USA (+1)</span>
         <div class="form-floating mb-3">
-            @Html.EditorFor(model => model.phone, new { htmlAttributes = new { @class = "form-control", @placeholder = "Phone" } })
-            @Html.ValidationMessageFor(model => model.phone, "", new { @class = "text-danger" })
+            <input type="tel" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" class="form-control" id="floatingInput" placeholder="Phone">
             <label for="floatingInput">Phone</label>
         </div>
         <div class="form-floating mb-5">
-            @Html.EditorFor(model => model.companyEmail, new { htmlAttributes = new { @class = "form-control", @placeholder = "Company Email" } })
-            @Html.ValidationMessageFor(model => model.companyEmail, "", new { @class = "text-danger" })
+            <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
             <label for="floatingInput">Company Email</label>
         </div>
-        <input type="submit" value="Next: Login Details" , class="btn btn-lg btn-outline-primary mt-2" />
-
-        <a class="btn btn-lg btn-outline-danger mt-2" href="~/Registration" role="button">Back: Account Type</a>
     </form>
-    }
-    <!--<a class="btn btn-lg btn-outline-danger mt-2" href="~/Registration" role="button">Back: Account Type</a>
+    <a class="btn btn-lg btn-outline-danger mt-2" href="~/Registration" role="button">Back: Account Type</a>
     <a class="btn btn-lg btn-outline-primary mt-2" href="~/Registration/BusinessStep3" role="button">
         Next: Login Details
-    </a>-->
+    </a>
 </div>
-
-

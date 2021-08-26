@@ -32,6 +32,11 @@ namespace CST_326_CLC.Services.Business
             return service.RegisterUser(model);
         }
 
+        public bool RegisterBusiness(BusinessModel model, string securityQuestion, string securityAnswer)
+        {
+            return service.RegisterBusiness(model, securityQuestion, securityAnswer);
+        }
+
         public bool AuthenticateUser(LoginModel model)
         {
             Log.Information("SecurityService: Authenticating user {0}", model.username);
@@ -49,6 +54,8 @@ namespace CST_326_CLC.Services.Business
         //from within the application.
         public UserModel _loggedUser { get; set; } = null;
         public PersonalUserModel _registrationUser { get; set; } = null;
+        public BusinessModel _businessUser { get; set; } = null;
+
 
         public UserManagement()
         {
