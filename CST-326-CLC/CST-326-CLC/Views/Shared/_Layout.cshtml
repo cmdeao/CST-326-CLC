@@ -11,25 +11,25 @@
     <link rel="manifest" href="/site.webmanifest">
     <meta name="msapplication-TileColor" content="#2b5797">
     <meta name="theme-color" content="#ffffff">
+    <script src="https://use.fontawesome.com/releases/v5.15.1/js/all.js"></script>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
 </head>
 <body>
-    <div class="container-fluid border-bottom">
+    <nav id="navbarScroll" class="container-fluid sticky-top bg-white border-bottom">
         <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3">
-            <a href="~/Home" class="d-flex col-md-3 mb-2 mb-md-0 text-dark text-decoration-none">
+            <a href="~/Home" class="d-flex col-md-3 mb-md-0 text-dark text-decoration-none">
                 <img src="~/img/logo1.png"
-                     style="width:85%; height:auto; display: block; margin-left:auto; margin-right:auto;" />
+                     style="width:60%; height:auto; display: block; margin-left:auto; margin-right:auto;" />
             </a>
 
-            <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-                <li><a href="#" class="h5 nav-link px-2 link-dark">Tracking</a></li>
-                <li><a href="#" class="h5 nav-link px-2 link-dark">Shipping</a></li>
-                <li><a href="#" class="h5 nav-link px-2 link-dark">Pickup</a></li>
-                <li><a href="#" class="h5 nav-link px-2 link-dark">Estimates</a></li>
-
+            <ul class="nav col-12 col-md-auto justify-content-center mb-md-0">
+                <li><a href="#benifits" class="nav-link px-2 link-dark">Why Deliver.ly?</a></li>
+                <li><a href="#TrackShipPackage" class="nav-link px-2 link-dark">Track & Ship</a></li>
+                <li><a href="#Pickup" class="nav-link px-2 link-dark">Pickup</a></li>
+                <li><a href="#FAQ" class="nav-link px-2 link-dark">Questions?</a></li>
             </ul>
 
             <div class="col-md-3 text-end dropdown">
@@ -55,12 +55,11 @@
                 </div>
             </div>
         </header>
-    </div>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
+    </nav>
+
+    <main role="main">
+        @RenderBody()
+    </main>
 
     <footer class="border-top footer text-muted">
     </footer>
