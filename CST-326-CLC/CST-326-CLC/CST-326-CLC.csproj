@@ -145,6 +145,8 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AddressModel.cs" />
+    <Compile Include="Models\BusinessLoginModel.cs" />
+    <Compile Include="Models\BusinessModel.cs" />
     <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\PersonalCredsModel.cs" />
     <Compile Include="Models\PersonalUserModel.cs" />
@@ -199,6 +201,8 @@
     <Content Include="Views\Registration\Personal.cshtml" />
     <Content Include="Views\Registration\Step3.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Registration\Business.cshtml" />
+    <Content Include="Views\Registration\BusinessStep3.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

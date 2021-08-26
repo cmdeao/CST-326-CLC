@@ -94,9 +94,6 @@ namespace CST_326_CLC.Services.Data
 
             conn.Open();
 
-            //string query = "INSERT INTO dbo.Users(first_name, last_name, phone, email, username, password, isBusinessAccount, isAdmin) " +
-            //    "VALUES(@fName, @lName, @phone, @email, @username, @password, @business, @admin)";
-
             string query = "INSERT INTO dbo.Users(first_name, last_name, address, apartment_suite, city, state, zipcode, country, phone, email, username," +
                 " password, isBusinessAccount, isAdmin) VALUES(@fName, @lName, @address, @apartment, @city, @state, @zip, @country, @phone, @email, @username," +
                 " @password, @business, @admin)";
@@ -129,6 +126,49 @@ namespace CST_326_CLC.Services.Data
 
             retValue = command.ExecuteNonQuery();
 
+            return Convert.ToBoolean(retValue);
+        }
+
+        public bool RegisterBusiness(BusinessModel model, string securityQuestion, string securityAnswer)
+        {
+            int retValue = 0;
+
+            SqlConnection conn = new SqlConnection(WebConfigurationManager.ConnectionStrings["myConn"].ConnectionString);
+
+            conn.Open();
+
+            string query = "INSERT INTO dbo.Users(first_name, last_name, address, apartment_suite, city, state, zipcode, country, phone, email, username," +
+                " password, isBusinessAccount, isAdmin, securityQuestion, securityAnswer) VALUES(@fName, @lName, @address, @apartment, " +
+                "@city, @state, @zip, @country, @phone, @email, @username, @password, @business, @admin, @question, @answer)";
+
+            SqlCommand command = new SqlCommand(query, conn);
+
+            command.Parameters.Add(new SqlParameter("@fName", SqlDbType.VarChar, 25)).Value = model.firstName;
+            command.Parameters.Add(new SqlParameter("@lName", SqlDbType.VarChar, 25)).Value = model.lastName;
+            command.Parameters.Add(new SqlParameter("@address", SqlDbType.VarChar, 100)).Value = model.companyAddress;
+            if (model.suite != null)
+            {
+                command.Parameters.Add(new SqlParameter("@apartment", SqlDbType.VarChar, 25)).Value = model.suite;
+            }
+            else
+            {
+                command.Parameters.Add(new SqlParameter("@apartment", SqlDbType.VarChar, 25)).Value = DBNull.Value;
+            }
+            command.Parameters.Add(new SqlParameter("@city", SqlDbType.VarChar, 50)).Value = model.city;
+            command.Parameters.Add(new SqlParameter("@state", SqlDbType.VarChar, 25)).Value = model.state;
+            command.Parameters.Add(new SqlParameter("@zip", SqlDbType.Int)).Value = model.zipCode;
+            command.Parameters.Add(new SqlParameter("@country", SqlDbType.VarChar, 25)).Value = model.country;
+            command.Parameters.Add(new SqlParameter("@phone", SqlDbType.VarChar, 15)).Value = model.phone;
+            command.Parameters.Add(new SqlParameter("@email", SqlDbType.VarChar, 50)).Value = model.companyEmail;
+            command.Parameters.Add(new SqlParameter("@username", SqlDbType.VarChar, 50)).Value = model.username;
+            command.Parameters.Add(new SqlParameter("@password", SqlDbType.VarChar, 100)).Value = Hash(model.password);
+            command.Parameters.Add(new SqlParameter("@business", SqlDbType.TinyInt)).Value = model.isBusinessAccount;
+            command.Parameters.Add(new SqlParameter("@admin", SqlDbType.TinyInt)).Value = model.isAdmin;
+            command.Parameters.Add(new SqlParameter("@question", SqlDbType.VarChar, 100)).Value = securityQuestion;
+            command.Parameters.Add(new SqlParameter("@answer", SqlDbType.VarChar, 100)).Value = securityAnswer;
+
+            command.Prepare();
+            retValue = command.ExecuteNonQuery();
             return Convert.ToBoolean(retValue);
         }
 
