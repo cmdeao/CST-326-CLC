@@ -1,7 +1,540 @@
 ﻿@{
     ViewData["Title"] = "Home";
 }
+<section class="text-light text-center">
+    <div class="container-fluid " style="background-color: #042967">
+        <div class="p-5 d-sm-flex">
+            <div class="row align-items-center">
+                <div class="p-5 col-md-5 col-12">
+                    <h1>
+                        Your package:
+                    </h1><br />
+                    <span style="color: #36B878;">
+                        <h3 class="display-3"><i class="far fa-check-circle"></i> Delivered!</h3>
+                    </span>
+                    <br />
+                    <p class="lead my-4">
+                        At Deliver.ly, we make sure that your packages get delivered from point A to point B without the hassle of major delays, expensive costs, and damaged items.
+                    </p>
+                    <br />
 
-<div class="container-fluid">
-    <img src="~/img/placeholder.png" class="img-fluid" alt="placeholder">
-</div>
+                    <h2 class="display-6">Stuck at Home?</h2>
+                    <p class="lead my-4">
+                        We also provide pickup services right in your neighborhood!<sup>*</sup> So sign up today and let us handle your delivery!
+                        <br /><br />
+                        <sub><small><sup>*</sup>Only available in the 48 contiguous states</small></sub>
+                    </p>
+                    <a href="#SignUp" role="button" class="btn btn-success btn-lg">
+                        Sign Up Now
+                    </a>
+                </div>
+                <div class="col-md-7 col-0">
+                    <img class="d-none d-md-block" src="img/deliver.png" alt="" style="object-fit:cover;" />
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section id="benifits" class="p-5">
+    <div class="container">
+        <div class="row text-center align-items-stretch justify-content-between">
+            <h1 class="display-5 mb-5"><b>Why Choose Deliver.ly?</b></h1>
+            <div class="col-md">
+                <div class="card border-light">
+                    <div class="card-body text-center">
+                        <img class="mb-3" src="img/track.png" style="width:200px; height:auto;" />
+                        <h3 class="card-title">Track Every Stop</h3>
+                        <p class="card-text">With our advanced technology, every step and drop off locations are tracked and notified to your email or mobile device. No more worry about delays or unexpected delivery dates.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md">
+                <div class="card border-light">
+                    <div class="card-body text-center">
+                        <img class="mb-3" src="img/fleet.png" style="width:200px; height:auto;" />
+                        <h3 class="card-title">Ship With Ease</h3>
+                        <p class="card-text">Either you are a buisness looking for shipping solutions, or someone shipping valuable items, we got it just for you! Our fleet is always ready to come to pick up and deliver your items in the safest and quickest way possible. </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md">
+                <div class="card border-light">
+                    <div class="card-body text-center">
+                        <img class="mb-3" src="img/pickup.png" style="width:200px; height:auto;" />
+                        <h3 class="card-title">Stay In, We Pick Up</h3>
+                        <p class="card-text">No nearby dropoff location? Don't worry, we come right to you! Just tell us how many packages and put them in a secure area, we will take care of the rest.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section id="TrackShipPackage" class="p-5" style="background-color: #36B878">
+    <div class="container text-center text-light">
+        <h1>Quick Start: Shipping / Tracking</h1>
+        <h5>Start your Deliver.ly journey here. Want to track or ship more than one package? Sign Up Now.</h5>
+        <a href="#SignUp" role="button" class="btn btn-success btn-lg my-3">
+            Sign Up Now
+        </a>
+        <div class="container mb-5">
+            <input type="button" class="btn-check" name="options-outlined" id="success-outlined">
+            <label class="btn btn-outline-light" for="success-outlined">
+                <h2><i class="fas fa-shipping-fast"></i> Shipping </h2>
+            </label>
+
+            <input type="button" class="btn-check" name="options-outlined" id="danger-outlined">
+            <label class="btn btn-outline-light" for="success-outlined">
+                <h2><i class="fas fa-map-marker-alt"></i> Tracking </h2>
+            </label>
+        </div>
+    </div>
+    <div id="deliveryFormFrom" class="container-fluid">
+        <h2 class="text-light">From:</h2>
+        <form class="form-floating">
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="floatingInput" placeholder="First Name">
+                <label for="floatingInput">First Name</label>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="floatingInput" placeholder="Last Name">
+                <label for="floatingInput">Last Name</label>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="floatingInput" placeholder="Address">
+                <label for="floatingInput">Address</label>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="floatingInput" placeholder="Apt/ Suite (Optional)">
+                <label for="floatingInput">Apt/ Suite (Optional)</label>
+            </div>
+            <div class="row">
+                <div class="col-4">
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="floatingInput" placeholder="City">
+                        <label for="floatingInput">City</label>
+                    </div>
+                </div>
+                <div class="col-5">
+                    <div class="form-floating mb-3">
+                        <select class="form-select">
+                            <option disabled selected>State</option>
+                            <option value="AL">Alabama (AL)</option>
+                            <option value="AK">Alaska (AK)</option>
+                            <option value="AZ">Arizona (AZ)</option>
+                            <option value="AR">Arkansas (AR)</option>
+                            <option value="CA">California (CA)</option>
+                            <option value="CO">Colorado (CO)</option>
+                            <option value="CT">Connecticut (CT)</option>
+                            <option value="DE">Delaware (DE)</option>
+                            <option value="DC">District Of Columbia (DC)</option>
+                            <option value="FL">Florida (FL)</option>
+                            <option value="GA">Georgia (GA)</option>
+                            <option value="HI">Hawaii (HI)</option>
+                            <option value="ID">Idaho (ID)</option>
+                            <option value="IL">Illinois (IL)</option>
+                            <option value="IN">Indiana (IN)</option>
+                            <option value="IA">Iowa (IA)</option>
+                            <option value="KS">Kansas (KS)</option>
+                            <option value="KY">Kentucky (KY)</option>
+                            <option value="LA">Louisiana (LA)</option>
+                            <option value="ME">Maine (ME)</option>
+                            <option value="MD">Maryland (MD)</option>
+                            <option value="MA">Massachusetts (MA)</option>
+                            <option value="MI">Michigan (MI)</option>
+                            <option value="MN">Minnesota (MN)</option>
+                            <option value="MS">Mississippi (MS)</option>
+                            <option value="MO">Missouri (MO)</option>
+                            <option value="MT">Montana (MT)</option>
+                            <option value="NE">Nebraska (NE)</option>
+                            <option value="NV">Nevada (NV)</option>
+                            <option value="NH">New Hampshire (NH)</option>
+                            <option value="NJ">New Jersey (NJ)</option>
+                            <option value="NM">New Mexico (NM)</option>
+                            <option value="NY">New York (NY)</option>
+                            <option value="NC">North Carolina (NC)</option>
+                            <option value="ND">North Dakota (ND)</option>
+                            <option value="OH">Ohio (OH)</option>
+                            <option value="OK">Oklahoma (OK)</option>
+                            <option value="OR">Oregon (OR)</option>
+                            <option value="PA">Pennsylvania (PA)</option>
+                            <option value="RI">Rhode Island (RI)</option>
+                            <option value="SC">South Carolina (SC)</option>
+                            <option value="SD">South Dakota (SD)</option>
+                            <option value="TN">Tennessee (TN)</option>
+                            <option value="TX">Texas (TX)</option>
+                            <option value="UT">Utah (UT)</option>
+                            <option value="VT">Vermont (VT)</option>
+                            <option value="VA">Virginia (VA)</option>
+                            <option value="WA">Washington (WA)</option>
+                            <option value="WV">West Virginia (WV)</option>
+                            <option value="WI">Wisconsin (WI)</option>
+                            <option value="WY">Wyoming (WY)</option>
+                        </select>
+                        <label for="floatingSelect">State</label>
+                    </div>
+                </div>
+                <div class="col-3">
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="floatingInput" placeholder="Zip Code">
+                        <label for="floatingInput">Zip Code</label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="floatingInput" placeholder="Country / Territory">
+                <label for="floatingInput">Country / Territory</label>
+            </div>
+            <div class="form-floating mb-5">
+                <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+                <label for="floatingInput">Email</label>
+            </div>
+        </form>
+    </div>
+    <div id="deliveryFormTo" class="container-fluid">
+        <h2 class="text-light">To:</h2>
+        <form class="form-floating">
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="floatingInput" placeholder="First Name">
+                <label for="floatingInput">First Name</label>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="floatingInput" placeholder="Last Name">
+                <label for="floatingInput">Last Name</label>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="floatingInput" placeholder="Address">
+                <label for="floatingInput">Address</label>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="floatingInput" placeholder="Apt/ Suite (Optional)">
+                <label for="floatingInput">Apt/ Suite (Optional)</label>
+            </div>
+            <div class="row">
+                <div class="col-4">
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="floatingInput" placeholder="City">
+                        <label for="floatingInput">City</label>
+                    </div>
+                </div>
+                <div class="col-5">
+                    <div class="form-floating mb-3">
+                        <select class="form-select">
+                            <option disabled selected>State</option>
+                            <option value="AL">Alabama (AL)</option>
+                            <option value="AK">Alaska (AK)</option>
+                            <option value="AZ">Arizona (AZ)</option>
+                            <option value="AR">Arkansas (AR)</option>
+                            <option value="CA">California (CA)</option>
+                            <option value="CO">Colorado (CO)</option>
+                            <option value="CT">Connecticut (CT)</option>
+                            <option value="DE">Delaware (DE)</option>
+                            <option value="DC">District Of Columbia (DC)</option>
+                            <option value="FL">Florida (FL)</option>
+                            <option value="GA">Georgia (GA)</option>
+                            <option value="HI">Hawaii (HI)</option>
+                            <option value="ID">Idaho (ID)</option>
+                            <option value="IL">Illinois (IL)</option>
+                            <option value="IN">Indiana (IN)</option>
+                            <option value="IA">Iowa (IA)</option>
+                            <option value="KS">Kansas (KS)</option>
+                            <option value="KY">Kentucky (KY)</option>
+                            <option value="LA">Louisiana (LA)</option>
+                            <option value="ME">Maine (ME)</option>
+                            <option value="MD">Maryland (MD)</option>
+                            <option value="MA">Massachusetts (MA)</option>
+                            <option value="MI">Michigan (MI)</option>
+                            <option value="MN">Minnesota (MN)</option>
+                            <option value="MS">Mississippi (MS)</option>
+                            <option value="MO">Missouri (MO)</option>
+                            <option value="MT">Montana (MT)</option>
+                            <option value="NE">Nebraska (NE)</option>
+                            <option value="NV">Nevada (NV)</option>
+                            <option value="NH">New Hampshire (NH)</option>
+                            <option value="NJ">New Jersey (NJ)</option>
+                            <option value="NM">New Mexico (NM)</option>
+                            <option value="NY">New York (NY)</option>
+                            <option value="NC">North Carolina (NC)</option>
+                            <option value="ND">North Dakota (ND)</option>
+                            <option value="OH">Ohio (OH)</option>
+                            <option value="OK">Oklahoma (OK)</option>
+                            <option value="OR">Oregon (OR)</option>
+                            <option value="PA">Pennsylvania (PA)</option>
+                            <option value="RI">Rhode Island (RI)</option>
+                            <option value="SC">South Carolina (SC)</option>
+                            <option value="SD">South Dakota (SD)</option>
+                            <option value="TN">Tennessee (TN)</option>
+                            <option value="TX">Texas (TX)</option>
+                            <option value="UT">Utah (UT)</option>
+                            <option value="VT">Vermont (VT)</option>
+                            <option value="VA">Virginia (VA)</option>
+                            <option value="WA">Washington (WA)</option>
+                            <option value="WV">West Virginia (WV)</option>
+                            <option value="WI">Wisconsin (WI)</option>
+                            <option value="WY">Wyoming (WY)</option>
+                        </select>
+                        <label for="floatingSelect">State</label>
+                    </div>
+                </div>
+                <div class="col-3">
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="floatingInput" placeholder="Zip Code">
+                        <label for="floatingInput">Zip Code</label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="floatingInput" placeholder="Country / Territory">
+                <label for="floatingInput">Country / Territory</label>
+            </div>
+            <div class="form-floating mb-5">
+                <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+                <label for="floatingInput">Email (Optional)</label>
+            </div>
+        </form>
+    </div>
+    <div id="deliveryFormPackage" class="container-fluid">
+        <h2 class="text-light">Package Dimensions</h2>
+        <div class="row g-3">
+            <div class="col">
+                <label class="form-label text-light">Length</label>
+                <input type="number" class="form-control" placeholder="Length">
+            </div>
+            <div class="col">
+                <label class="form-label text-light">Width</label>
+                <input type="number" class="form-control" placeholder="Width">
+            </div>
+            <div class="col">
+                <label class="form-label text-light">Height</label>
+                <input type="number" class="form-control" placeholder="Height">
+            </div>
+            <div class="col">
+                <label class="form-label text-light">Weight</label>
+                <input type="number" class="form-control" placeholder="Weight">
+            </div>
+        </div>
+    </div>
+    <div id="trackingForm" class="container-fluid">
+        <label class="form-label text-light"><h2>Tracking Number</h2></label>
+        <input type="text" class="form-control">
+    </div>
+
+</section>
+<section id="Pickup" class="p-5">
+    <div class="container text-center">
+        <h1>Quick Start: Pickup</h1>
+        <h5>Start your Deliver.ly journey here. Want to deliver more than one package? Sign Up Now.</h5>
+        <a href="#SignUp" role="button" class="btn btn-success btn-lg my-3">
+            Sign Up Now
+        </a>
+    </div>
+    <h2 class="py-3"> PICK UP FROM:</h2>
+    <form class="form-floating">
+        <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="floatingInput" placeholder="First Name">
+            <label for="floatingInput">First Name</label>
+        </div>
+        <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="floatingInput" placeholder="Last Name">
+            <label for="floatingInput">Last Name</label>
+        </div>
+        <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="floatingInput" placeholder="Address">
+            <label for="floatingInput">Address</label>
+        </div>
+        <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="floatingInput" placeholder="Apt/ Suite (Optional)">
+            <label for="floatingInput">Apt/ Suite (Optional)</label>
+        </div>
+        <div class="row">
+            <div class="col-4">
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="floatingInput" placeholder="City">
+                    <label for="floatingInput">City</label>
+                </div>
+            </div>
+            <div class="col-5">
+                <div class="form-floating mb-3">
+                    <select class="form-select">
+                        <option disabled selected>State</option>
+                        <option value="AL">Alabama (AL)</option>
+                        <option value="AK">Alaska (AK)</option>
+                        <option value="AZ">Arizona (AZ)</option>
+                        <option value="AR">Arkansas (AR)</option>
+                        <option value="CA">California (CA)</option>
+                        <option value="CO">Colorado (CO)</option>
+                        <option value="CT">Connecticut (CT)</option>
+                        <option value="DE">Delaware (DE)</option>
+                        <option value="DC">District Of Columbia (DC)</option>
+                        <option value="FL">Florida (FL)</option>
+                        <option value="GA">Georgia (GA)</option>
+                        <option value="HI">Hawaii (HI)</option>
+                        <option value="ID">Idaho (ID)</option>
+                        <option value="IL">Illinois (IL)</option>
+                        <option value="IN">Indiana (IN)</option>
+                        <option value="IA">Iowa (IA)</option>
+                        <option value="KS">Kansas (KS)</option>
+                        <option value="KY">Kentucky (KY)</option>
+                        <option value="LA">Louisiana (LA)</option>
+                        <option value="ME">Maine (ME)</option>
+                        <option value="MD">Maryland (MD)</option>
+                        <option value="MA">Massachusetts (MA)</option>
+                        <option value="MI">Michigan (MI)</option>
+                        <option value="MN">Minnesota (MN)</option>
+                        <option value="MS">Mississippi (MS)</option>
+                        <option value="MO">Missouri (MO)</option>
+                        <option value="MT">Montana (MT)</option>
+                        <option value="NE">Nebraska (NE)</option>
+                        <option value="NV">Nevada (NV)</option>
+                        <option value="NH">New Hampshire (NH)</option>
+                        <option value="NJ">New Jersey (NJ)</option>
+                        <option value="NM">New Mexico (NM)</option>
+                        <option value="NY">New York (NY)</option>
+                        <option value="NC">North Carolina (NC)</option>
+                        <option value="ND">North Dakota (ND)</option>
+                        <option value="OH">Ohio (OH)</option>
+                        <option value="OK">Oklahoma (OK)</option>
+                        <option value="OR">Oregon (OR)</option>
+                        <option value="PA">Pennsylvania (PA)</option>
+                        <option value="RI">Rhode Island (RI)</option>
+                        <option value="SC">South Carolina (SC)</option>
+                        <option value="SD">South Dakota (SD)</option>
+                        <option value="TN">Tennessee (TN)</option>
+                        <option value="TX">Texas (TX)</option>
+                        <option value="UT">Utah (UT)</option>
+                        <option value="VT">Vermont (VT)</option>
+                        <option value="VA">Virginia (VA)</option>
+                        <option value="WA">Washington (WA)</option>
+                        <option value="WV">West Virginia (WV)</option>
+                        <option value="WI">Wisconsin (WI)</option>
+                        <option value="WY">Wyoming (WY)</option>
+                    </select>
+                    <label for="floatingSelect">State</label>
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="floatingInput" placeholder="Zip Code">
+                    <label for="floatingInput">Zip Code</label>
+                </div>
+            </div>
+        </div>
+        <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="floatingInput" placeholder="Country / Territory">
+            <label for="floatingInput">Country / Territory</label>
+        </div>
+        <div class="form-floating mb-5">
+            <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+            <label for="floatingInput">Email</label>
+        </div>
+    </form>
+    <div id="deliveryFormPackage">
+        <h2>Package Dimensions</h2>
+        <div class="row g-3">
+            <div class="col">
+                <label class="form-label">Length</label>
+                <input type="number" class="form-control" placeholder="Length">
+            </div>
+            <div class="col">
+                <label class="form-label">Width</label>
+                <input type="number" class="form-control" placeholder="Width">
+            </div>
+            <div class="col">
+                <label class="form-label">Height</label>
+                <input type="number" class="form-control" placeholder="Height">
+            </div>
+            <div class="col">
+                <label class="form-label">Weight</label>
+                <input type="number" class="form-control" placeholder="Weight">
+            </div>
+        </div>
+    </div>
+</section>
+<section id="FAQ" class="p-5 text-light" style="background-color: #042967">
+    <div class="continer">
+        <h2 class="text-center mb-4">Frequently Asked Questions</h2>
+        <div class="accordion accordion-flush text-light">
+            <div class="accordion-item text-light" style="background-color: #042967">
+                <h1 class="accordion-header" id="flush-headingOne">
+                    <button class="accordion-button collapsed text-light" type="button" data-bs-toggle="collapse" data-bs-target="#item1" style="background-color: #042967">
+                        <h5>How Much Will My Shipment Cost?</h5>
+                    </button>
+                </h1>
+                <div id="item1" class="accordion-collapse collapse">
+                    <div class="accordion-body">Shipping cost depends on origin, destination, service, package weight, and other considerations such as pickup.</div>
+                </div>
+            </div>
+            <div class="accordion-item text-light" style="background-color: #042967">
+                <h1 class="accordion-header" id="flush-headingOne">
+                    <button class="accordion-button collapsed text-light" type="button" data-bs-toggle="collapse" data-bs-target="#item2" style="background-color: #042967">
+                        <h5>How Should I Pack My Shipment?</h5>
+                    </button>
+                </h1>
+                <div id="item2" class="accordion-collapse collapse">
+                    <div class="accordion-body">
+                        <ul>
+                            <li>Use a rigid box with flaps intact</li>
+                            <li>Remove any labels, hazardous materials indicators, and other previous shipment markings on the box that are no longer applicable</li>
+                            <li>Wrap all items separately</li>
+                            <li>Use adequate cushioning material</li>
+                            <li>Use strong tape designed for shipping</li>
+                            <li>Do not use string or paper over-wrap</li>
+                            <li>Use a single address label that has clear, complete delivery and return information</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item text-light" style="background-color: #042967">
+                <h1 class="accordion-header" id="flush-headingOne">
+                    <button class="accordion-button collapsed text-light" type="button" data-bs-toggle="collapse" data-bs-target="#item3" style="background-color: #042967">
+                        <h5>I’ve Forgotten My Username and/or Password, or They No Longer Work. What Should I Do?</h5>
+                    </button>
+                </h1>
+                <div id="item3" class="accordion-collapse collapse">
+                    <div class="accordion-body">
+                        Select "Forgot Password?" at the bottom of the login dropdown. This takes you to the “Reset or recover your login” settings screen. <br />
+
+                        Enter your registered username to rerive your passowrd via email. If you for got your username enter your registered Email Address and we’ll send you an email to reset your username.
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item text-light" style="background-color: #042967">
+                <h1 class="accordion-header" id="flush-headingOne">
+                    <button class="accordion-button collapsed text-light" type="button" data-bs-toggle="collapse" data-bs-target="#item4" style="background-color: #042967">
+                        <h5>The Status Of My Shipment Is “Out for Delivery.” When Will I Receive My Package?</h5>
+                    </button>
+                </h1>
+                <div id="item4" class="accordion-collapse collapse">
+                    <div class="accordion-body">
+                        Typically, our drivers are on a 12 hour shift to provide a convenient 24/7 deliverly drop off, but most likely most packages deliver as late as 8 p.m. If we are unable to deliver a package that shows a status of "out for delivery," we will attempt delivery on the next business day.
+                        <br />
+                        Please note that we are unable to contact our drivers to provide an estimated delivery time.
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item text-light" style="background-color: #042967">
+                <h1 class="accordion-header" id="flush-headingOne">
+                    <button class="accordion-button collapsed text-light" type="button" data-bs-toggle="collapse" data-bs-target="#item5" style="background-color: #042967">
+                        <h5>The Address I Provided For Delivery Is Incomplete Or Wrong. What Can I Do?</h5>
+                    </button>
+                </h1>
+                <div id="item5" class="accordion-collapse collapse">
+                    <div class="accordion-body">
+                        If you are a reciver, look for tracking details indicating a problem with the address, look for the "Correct Reciver's Address" button. If this button does not appear, please contact the sender to note the error in the address. The sender should correct the address and pass the updated information to UPS.
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item text-light" style="background-color: #042967">
+                <h1 class="accordion-header" id="flush-headingOne">
+                    <button class="accordion-button collapsed text-light" type="button" data-bs-toggle="collapse" data-bs-target="#item6" style="background-color: #042967">
+                        <h5>A Driver Has Not Yet Picked Up My Package. What Should I Do?</h5>
+                    </button>
+                </h1>
+                <div id="item6" class="accordion-collapse collapse">
+                    <div class="accordion-body">
+                        First make sure that you have put a request for a pickup. If you do, a driver will come to pick it up no later than 6 p.m. If we were unable to pickup your packages, we will pick up on the next business day.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
