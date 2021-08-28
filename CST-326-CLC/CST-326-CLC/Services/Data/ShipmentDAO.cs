@@ -100,7 +100,7 @@ namespace CST_326_CLC.Services.Data
                 command.Parameters.Add("@width", SqlDbType.Int).Value = model.Width;
                 command.Parameters.Add("@length", SqlDbType.Int).Value = model.Length;
                 command.Parameters.Add("@zip", SqlDbType.Int).Value = model.Zip;
-                command.Parameters.Add("@packaging", SqlDbType.NVarChar, 50).Value = model.IsPackageStandard;
+                command.Parameters.Add("@packaging", SqlDbType.TinyInt).Value = model.IsPackageStandard;
                 command.Parameters.Add("@delivery", SqlDbType.NVarChar, 100).Value = model.DeliveryOption;
                 command.Parameters.Add("@residential", SqlDbType.TinyInt).Value = model.IsResidential;
 

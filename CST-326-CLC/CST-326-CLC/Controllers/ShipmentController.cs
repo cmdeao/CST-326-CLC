@@ -15,7 +15,7 @@ namespace CST_326_CLC.Controllers
         public ActionResult Index()
         {
             Log.Information("Navigating to View Shipments...");
-            return View("ShipmentIndexTEST");
+            return View("SearchShipments");
         }
 
         [HttpPost]
