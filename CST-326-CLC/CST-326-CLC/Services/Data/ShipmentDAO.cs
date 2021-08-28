@@ -42,7 +42,8 @@ namespace CST_326_CLC.Services.Data
                         retrievedModel.Width = reader.GetInt32(7);
                         retrievedModel.Length = reader.GetInt32(8);
                         retrievedModel.Zip = reader.GetInt32(9);
-                        retrievedModel.PackagingType = reader.GetString(10);
+                        int packageType = (int)reader.GetSqlByte(10);
+                        retrievedModel.IsPackageStandard = Convert.ToBoolean(packageType);
                         retrievedModel.DeliveryOption = reader.GetString(11);
 
                         int residential = (int)reader.GetSqlByte(12);
@@ -99,7 +100,7 @@ namespace CST_326_CLC.Services.Data
                 command.Parameters.Add("@width", SqlDbType.Int).Value = model.Width;
                 command.Parameters.Add("@length", SqlDbType.Int).Value = model.Length;
                 command.Parameters.Add("@zip", SqlDbType.Int).Value = model.Zip;
-                command.Parameters.Add("@packaging", SqlDbType.NVarChar, 50).Value = model.PackagingType;
+                command.Parameters.Add("@packaging", SqlDbType.NVarChar, 50).Value = model.IsPackageStandard;
                 command.Parameters.Add("@delivery", SqlDbType.NVarChar, 100).Value = model.DeliveryOption;
                 command.Parameters.Add("@residential", SqlDbType.TinyInt).Value = model.IsResidential;
 
