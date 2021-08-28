@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.ComponentModel.DataAnnotations;
+using Serilog;
 
 namespace CST_326_CLC.Models
 {
@@ -36,38 +37,48 @@ namespace CST_326_CLC.Models
         public decimal CalculateCost(int zip, int length, int width, int height, int weight,
             string deliveryOption)
         {
+            Log.Information("Calculating Cost of shipment...");
             // decimal residentialCost = CalculateResidentialCost(isResidential);
 
             decimal deliveryOptionsCost = CalculateDeliveryOptions(deliveryOption);
             decimal zipCost = CalculateZipCost(zip);
             decimal sizeCost = CalculatePackageSizeCost(length, width, height, weight);
-            
-            return deliveryOptionsCost + zipCost + sizeCost;
+            decimal sum = deliveryOptionsCost + zipCost + sizeCost;
+
+            Log.Information("Total Shipment Cost is {0}", sum);
+            return sum;
         }
 
         // Logic for is residential cost variable here
         public decimal CalculateResidentialCost(bool isResidential)
         {
+            Log.Information("Calculating Residential variable cost...");
             if (isResidential)
             {
+                Log.Information("Residential Cost Variable is {0}", 2.00);
                 return 2.00m;
             }
+            Log.Information("Residential Cost Variable is {0}", 4.00);
             return 4.00m;
         }
 
         // Logic for Delivery options cost variable here Options (Ground 4-5 days, Next Day, Standard 1-3 days)
         public decimal CalculateDeliveryOptions(string deliveryOption)
         {
+            Log.Information("Calculating Residential variable cost...");
             if (deliveryOption == null) return 0m;
             else
             {
                 switch (deliveryOption.ToLower())
                 {
                     case "ground":
+                        Log.Information("Delivery Options {0} Cost Variable is {1}", "Ground", 5.00);
                         return 5.00m;
                     case "standard":
+                        Log.Information("Delivery Options {0} Cost Variable is {1}", "Standard", 10.00);
                         return 10.00m;
                     case "next day":
+                        Log.Information("Delivery Options {0} Cost Variable is {1}", "Next Day", 15.00);
                         return 15.00m;
                 }
             }
@@ -77,15 +88,21 @@ namespace CST_326_CLC.Models
         // Logic for zip cost here
         public decimal CalculateZipCost(int zip)
         {
+            Log.Information("Calculating Zip variable cost...");
             // For now a basic cost is spit out and we can get more complex later on if need be
             if (zip == 0) return 0m;
-            else return 5.00m;
+            else
+            {
+                Log.Information("Zip Cost Variable is {0}", 5.00);
+                return 5.00m;
+            }
         }
 
         // Logic for package dimensions cost variable here -> will check the packaging type for STANDARD sizes
         public decimal CalculatePackageSizeCost(int length, int width, 
             int height, int weight)
         {
+            Log.Information("Calculating Package Size variable cost...");
             // If package is standard sizing
             /*if (isPackageStandard && packageSize != null)
             {
@@ -100,13 +117,14 @@ namespace CST_326_CLC.Models
                 }
             }*/
             // Else we will do the math for non standard sizing
-            
+
             decimal lengthPrice = length / 2;
             decimal widthPrice = width / 2;
             decimal heightPrice = height / 2;
             decimal weightPrice = (weight + 5) / 2;
-
-            return lengthPrice + widthPrice + heightPrice + weightPrice;
+            decimal sum = lengthPrice + widthPrice + heightPrice + weightPrice;
+            Log.Information("Delivery Size Cost Variable is {0}", sum);
+            return sum;
         }
 
         // Method to determine the Packaging type
