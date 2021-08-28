@@ -32,6 +32,10 @@ namespace CST_326_CLC.Controllers
         {
             Log.Information("User attempting to create shipment...");
 
+            // Can be used to display cost to user
+            decimal shipmentCost = model.CalculateCost(model.Zip, model.Length, model.Width,
+                model.Height, model.Weight, model.DeliveryOption);
+
             if(!ModelState.IsValid)
             {
                 Log.Information("Create Shipment: The ModelState was invalid.");
