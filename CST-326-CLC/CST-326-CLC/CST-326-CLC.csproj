@@ -205,8 +205,6 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Registration\Business.cshtml" />
     <Content Include="Views\Registration\BusinessStep3.cshtml" />
-    <Content Include="Views\Registration\PersonalNEWTEST.cshtml" />
-    <Content Include="Views\Registration\BusinessNEW.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
