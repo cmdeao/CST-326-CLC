@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using Serilog;
+using CST_326_CLC.Controllers;
 
 namespace CST_326_CLC.Services.Business
 {
@@ -26,15 +27,14 @@ namespace CST_326_CLC.Services.Business
             return service.CheckEmail(email);
         }
 
-        public bool RegisterUser(PersonalUserModel model)
+        public bool RegisterPersonal(PersonalRegistration model)
         {
-            Log.Information("SecurityService: Registering user: {0}", model.username);
-            return service.RegisterUser(model);
+            return service.RegisterPersonal(model);
         }
 
-        public bool RegisterBusiness(BusinessModel model, string securityQuestion, string securityAnswer)
+        public bool RegisterBusiness(BusinessLoginModel login, BusinessRegistration businessModel)
         {
-            return service.RegisterBusiness(model, securityQuestion, securityAnswer);
+            return service.RegisterBusinessNEW(login, businessModel);
         }
 
         public bool AuthenticateUser(LoginModel model)
@@ -53,9 +53,10 @@ namespace CST_326_CLC.Services.Business
         //_loggedUser is where a logged in user's information will be stored for access
         //from within the application.
         public UserModel _loggedUser { get; set; } = null;
-        public PersonalUserModel _registrationUser { get; set; } = null;
-        public BusinessModel _businessUser { get; set; } = null;
 
+        public PersonalRegistration _personalRegistration { get; set; } = null;
+
+        public BusinessRegistration _businessRegistration { get; set; } = null;
 
         public UserManagement()
         {
@@ -88,7 +89,16 @@ namespace CST_326_CLC.Services.Business
 
         public void ClearRegistration()
         {
-            _registrationUser = null;
+            if(_personalRegistration != null)
+            {
+                _personalRegistration = null;
+                return;
+            }
+            if(_businessRegistration != null)
+            {
+                _businessRegistration = null;
+                return;
+            }
         }
     }
 }

@@ -18,7 +18,6 @@ namespace CST_326_CLC.Models
         [Required(ErrorMessage = "The City field is required.")]
         public string city { get; set; }
 
-        [Required(ErrorMessage = "The State field is required.")]
         public string state { get; set; }
 
         [Required(ErrorMessage = "The Country field is required.")]
@@ -27,7 +26,6 @@ namespace CST_326_CLC.Models
         [Required(ErrorMessage = "The Zip field is required.")]
         public int zip { get; set; }
 
-        [Required(ErrorMessage = "The Country Code field is required.")]
         public int countryCode { get; set; }
 
     }

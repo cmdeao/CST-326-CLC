@@ -15,6 +15,8 @@ namespace CST_326_CLC.Services.Data
     {
         public bool InsertAddress(AddressModel model)
         {
+            SqlConnection conn = new SqlConnection(WebConfigurationManager.ConnectionStrings["myConn"].ConnectionString);
+            conn.Open();
             return false;
         }
 

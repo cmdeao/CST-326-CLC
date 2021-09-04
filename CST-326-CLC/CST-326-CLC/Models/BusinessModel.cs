@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using System.ComponentModel.DataAnnotations;
 
 namespace CST_326_CLC.Models
 {
@@ -21,22 +21,6 @@ namespace CST_326_CLC.Models
         [Required(ErrorMessage = "The Company Name field is required.")]
         public string companyName { get; set; }
 
-        [Required(ErrorMessage = "The Address field is required.")]
-        public string companyAddress { get; set; }
-
-        public string suite { get; set; }
-
-        [Required(ErrorMessage = "The City field is required.")]
-        public string city { get; set; }
-
-        public string state { get; set; }
-
-        [Required(ErrorMessage = "The Zip Code field is required.")]
-        public int zipCode { get; set; }
-
-        [Required(ErrorMessage = "The Country / Territory field is required.")]
-        public string country { get; set; }
-
         [Required(ErrorMessage = "The Phone Number field is required.")]
         [StringLength(15, ErrorMessage = "The Phone Number should not exceed 15 characters.")]
         public string phone { get; set; }
@@ -45,7 +29,11 @@ namespace CST_326_CLC.Models
         [DataType(DataType.EmailAddress)]
         public string companyEmail { get; set; }
 
+        [StringLength(50, ErrorMessage = "The Username should not exceed 50 characters.")]
         public string username { get; set; }
+
+        [DataType(DataType.Password)]
+        [StringLength(50, ErrorMessage = "The Password should not exceed 50 characters.")]
         public string password { get; set; }
         public bool isBusinessAccount { get; set; }
         public bool isAdmin { get; set; }

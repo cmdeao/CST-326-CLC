@@ -27,11 +27,9 @@ namespace CST_326_CLC.Models
         [StringLength(50, ErrorMessage = "The Last Name should not exceed 50 characters.")]
         public string email { get; set; }
 
-        [Required(ErrorMessage = "The Username field is required.")]
         [StringLength(50, ErrorMessage = "The Username should not exceed 50 characters.")]
         public string username { get; set; }
 
-        [Required(ErrorMessage = "The Password field is required.")]
         [DataType(DataType.Password)]
         [StringLength(50, ErrorMessage = "The Password should not exceed 50 characters.")]
         public string password { get; set; }
