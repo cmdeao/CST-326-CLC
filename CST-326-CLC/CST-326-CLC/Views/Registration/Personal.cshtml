@@ -1,4 +1,4 @@
-﻿@model CST_326_CLC.Models.PersonalUserModel
+﻿@model CST_326_CLC.Controllers.PersonalRegistration
 
 @{
     ViewData["Title"] = "Personal Registration";
@@ -29,39 +29,39 @@
     @using (Html.BeginForm("Step3", "Registration", FormMethod.Post))
     {
         @Html.AntiForgeryToken()
-    <div class="form-floating mb-3">
+        <div class="form-floating mb-3">
 
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-        @Html.EditorFor(model => model.firstName, new { htmlAttributes = new { @class = "form-control", @placeholder = "First Name" } })
-        @Html.ValidationMessageFor(model => model.firstName, "", new { @class = "text-danger" })
-        <label for="floatingInput">First Name</label>
-    </div>
-    <div class="form-floating mb-3">
-        @Html.EditorFor(model => model.lastName, new { htmlAttributes = new { @class = "form-control", @placeholder = "Last Name" } })
-        @Html.ValidationMessageFor(model => model.lastName, "", new { @class = "text-danger" })
-        <label for="floatingInput">Last Name</label>
-    </div>
-    <div class="form-floating mb-3">
-        @Html.EditorFor(model => model.address, new { htmlAttributes = new { @class = "form-control", @placeholder = "Address" } })
-        @Html.ValidationMessageFor(model => model.address, "", new { @class = "text-danger" })
-        <label for="floatingInput">Address</label>
-    </div>
-    <div class="form-floating mb-3">
-        @Html.EditorFor(model => model.apartmentSuite, new { htmlAttributes = new { @class = "form-control", @placeholder = "Apt/ Suite" } })
-        <label for="floatingInput">Apt/ Suite (Optional)</label>
-    </div>
+            @Html.EditorFor(model => model.userModel.firstName, new { htmlAttributes = new { @class = "form-control", @placeholder = "First Name" } })
+            @Html.ValidationMessageFor(model => model.userModel.firstName, "", new { @class = "text-danger" })
+            <label for="floatingInput">First Name</label>
+        </div>
+        <div class="form-floating mb-3">
+            @Html.EditorFor(model => model.userModel.lastName, new { htmlAttributes = new { @class = "form-control", @placeholder = "Last Name" } })
+            @Html.ValidationMessageFor(model => model.userModel.lastName, "", new { @class = "text-danger" })
+            <label for="floatingInput">Last Name</label>
+        </div>
+        <div class="form-floating mb-3">
+            @Html.EditorFor(model => model.addressModel.address, new { htmlAttributes = new { @class = "form-control", @placeholder = "Address" } })
+            @Html.ValidationMessageFor(model => model.addressModel.address, "", new { @class = "text-danger" })
+            <label for="floatingInput">Address</label>
+        </div>
+        <div class="form-floating mb-3">
+            @Html.EditorFor(model => model.addressModel.aptSuite, new { htmlAttributes = new { @class = "form-control", @placeholder = "Apt/ Suite" } })
+            <label for="floatingInput">Apt/ Suite (Optional)</label>
+        </div>
         <div class="row">
             <div class="col-4">
                 <div class="form-floating mb-3">
-                    @Html.EditorFor(model => model.city, new { htmlAttributes = new { @class = "form-control", @placeholder = "City" } })
-                    @Html.ValidationMessageFor(model => model.city, "", new { @class = "text-danger" })
+                    @Html.EditorFor(model => model.addressModel.city, new { htmlAttributes = new { @class = "form-control", @placeholder = "City" } })
+                    @Html.ValidationMessageFor(model => model.addressModel.city, "", new { @class = "text-danger" })
                     <label for="floatingInput">City</label>
                 </div>
             </div>
             <div class="col-5">
                 <div class="form-floating mb-3">
-                     <select class="form-select" id="userState" name="userState" required>
+                    <select class="form-select" id="userState" name="userState" required>
                         <option disabled selected>State</option>
                         <option value="AL">Alabama (AL)</option>
                         <option value="AK">Alaska (AK)</option>
@@ -120,33 +120,34 @@
             </div>
             <div class="col-3">
                 <div class="form-floating mb-3">
-                    @Html.EditorFor(model => model.zipCode, new { htmlAttributes = new { @class = "form-control", @placeholder = "Zip Code" } })
-                    @Html.ValidationMessageFor(model => model.zipCode, "", new { @class = "text-danger" })
+                    @Html.EditorFor(model => model.addressModel.zip, new { htmlAttributes = new { @class = "form-control", @placeholder = "Zip Code" } })
+                    @Html.ValidationMessageFor(model => model.addressModel.zip, "", new { @class = "text-danger" })
                     <label for="floatingInput">Zip Code</label>
                 </div>
             </div>
         </div>
         <div class="form-floating mb-3">
-            @Html.EditorFor(model => model.country, new { htmlAttributes = new { @class = "form-control", @placeholder = "Country / Territory" } })
-            @Html.ValidationMessageFor(model => model.country, "", new { @class = "text-danger" })
+            @Html.EditorFor(model => model.addressModel.country, new { htmlAttributes = new { @class = "form-control", @placeholder = "Country / Territory" } })
+            @Html.ValidationMessageFor(model => model.addressModel.country, "", new { @class = "text-danger" })
             <label for="floatingInput">Country / Territory</label>
         </div>
         <span class="input-group-text" id="basic-addon1">Country Code: USA (+1)</span>
         <div class="form-floating mb-3">
-            @Html.EditorFor(model => model.phone, new { htmlAttributes = new { @class = "form-control", @placeholder = "Phone" } })
-            @Html.ValidationMessageFor(model => model.phone, "", new { @class = "text-danger" })
+            @Html.EditorFor(model => model.userModel.phone, new { htmlAttributes = new { @class = "form-control", @placeholder = "Phone" } })
+            @Html.ValidationMessageFor(model => model.userModel.phone, "", new { @class = "text-danger" })
             <label for="floatingInput">Phone</label>
         </div>
         <div class="form-floating mb-5">
-            @Html.EditorFor(model => model.email, new { htmlAttributes = new { @class = "form-control", @placeholder = "Email" } })
-            @Html.ValidationMessageFor(model => model.email, "", new { @class = "text-danger" })
+            @Html.EditorFor(model => model.userModel.email, new { htmlAttributes = new { @class = "form-control", @placeholder = "Email" } })
+            @Html.ValidationMessageFor(model => model.userModel.email, "", new { @class = "text-danger" })
             <label for="floatingInput">Email</label>
         </div>
         <input type="submit" value="Next: Login Details" , class="btn btn-lg btn-outline-primary mt-2" />
-        
+
         <a class="btn btn-lg btn-outline-danger mt-2" href="~/Registration" role="button">Back: Account Type</a>
     }
 
     <!--<a class="btn btn-lg btn-outline-primary mt-2" href="~/Registration/Step3" role="button">Next: Login Details</a>-->
 </div>
+
 

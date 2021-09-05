@@ -1,4 +1,4 @@
-﻿@model CST_326_CLC.Models.BusinessModel
+﻿@model CST_326_CLC.Controllers.BusinessRegistration
 
 @{
     ViewData["Title"] = "Business Registration";
@@ -28,135 +28,137 @@
     @using (Html.BeginForm("BusinessStep3", "Registration", FormMethod.Post))
     {
         @Html.AntiForgeryToken();
-    <form class="form-floating">
-        <div class="form-floating mb-3">
-            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <form class="form-floating">
+            <div class="form-floating mb-3">
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
 
-            @Html.EditorFor(model => model.firstName, new { htmlAttributes = new { @class = "form-control", @placeholder = "First Name" } })
-            @Html.ValidationMessageFor(model => model.firstName, "", new { @class = "text-danger" })
-            <label for="floatingInput">First Name</label>
-        </div>
-        <div class="form-floating mb-3">
-            @Html.EditorFor(model => model.lastName, new { htmlAttributes = new { @class = "form-control", @placeholder = "Last Name" } })
-            @Html.ValidationMessageFor(model => model.lastName, "", new { @class = "text-danger" })
-            <label for="floatingInput">Last Name</label>
-        </div>
-        <div class="form-floating mb-3">
-            @Html.EditorFor(model => model.companyName, new { htmlAttributes = new { @class = "form-control", @placeholder = "Company Name" } })
-            @Html.ValidationMessageFor(model => model.companyName, "", new { @class = "text-danger" })
-            <label for="floatingInput">Company Name</label>
-        </div>
-        <div class="form-floating mb-3">
-            @Html.EditorFor(model => model.companyAddress, new { htmlAttributes = new { @class = "form-control", @placeholder = "Company Address" } })
-            @Html.ValidationMessageFor(model => model.companyAddress, "", new { @class = "text-danger" })
-            <label for="floatingInput">Company Address</label>
-        </div>
-        <div class="form-floating mb-3">
-            @Html.EditorFor(model => model.suite, new { htmlAttributes = new { @class = "form-control", @placeholder = "Apt/Suite (Optional)" } })
-            @Html.ValidationMessageFor(model => model.suite, "", new { @class = "text-danger" })
-            <label for="floatingInput">Apt/ Suite (Optional)</label>
-        </div>
-        <div class="row">
-            <div class="col-4">
-                <div class="form-floating mb-3">
-                    @Html.EditorFor(model => model.city, new { htmlAttributes = new { @class = "form-control", @placeholder = "City" } })
-                    @Html.ValidationMessageFor(model => model.city, "", new { @class = "text-danger" })
-                    <label for="floatingInput">City</label>
+                @Html.EditorFor(model => model.businessModel.firstName, new { htmlAttributes = new { @class = "form-control", @placeholder = "First Name" } })
+                @Html.ValidationMessageFor(model => model.businessModel.firstName, "", new { @class = "text-danger" })
+                <label for="floatingInput">First Name</label>
+            </div>
+            <div class="form-floating mb-3">
+                @Html.EditorFor(model => model.businessModel.lastName, new { htmlAttributes = new { @class = "form-control", @placeholder = "Last Name" } })
+                @Html.ValidationMessageFor(model => model.businessModel.lastName, "", new { @class = "text-danger" })
+                <label for="floatingInput">Last Name</label>
+            </div>
+            <div class="form-floating mb-3">
+                @Html.EditorFor(model => model.businessModel.companyName, new { htmlAttributes = new { @class = "form-control", @placeholder = "Company Name" } })
+                @Html.ValidationMessageFor(model => model.businessModel.companyName, "", new { @class = "text-danger" })
+                <label for="floatingInput">Company Name</label>
+            </div>
+            <div class="form-floating mb-3">
+                @Html.EditorFor(model => model.addressModel.address, new { htmlAttributes = new { @class = "form-control", @placeholder = "Company Address" } })
+                @Html.ValidationMessageFor(model => model.addressModel.address, "", new { @class = "text-danger" })
+                <label for="floatingInput">Company Address</label>
+            </div>
+            <div class="form-floating mb-3">
+                @Html.EditorFor(model => model.addressModel.aptSuite, new { htmlAttributes = new { @class = "form-control", @placeholder = "Apt/Suite (Optional)" } })
+                @Html.ValidationMessageFor(model => model.addressModel.aptSuite, "", new { @class = "text-danger" })
+                <label for="floatingInput">Apt/ Suite (Optional)</label>
+            </div>
+            <div class="row">
+                <div class="col-4">
+                    <div class="form-floating mb-3">
+                        @Html.EditorFor(model => model.addressModel.city, new { htmlAttributes = new { @class = "form-control", @placeholder = "City" } })
+                        @Html.ValidationMessageFor(model => model.addressModel.city, "", new { @class = "text-danger" })
+                        <label for="floatingInput">City</label>
+                    </div>
+                </div>
+                <div class="col-5">
+                    <div class="form-floating mb-3">
+                        <select class="form-select" id="companyState" name="companyState" required>
+                            <option disabled selected>State</option>
+                            <option value="AL">Alabama (AL)</option>
+                            <option value="AK">Alaska (AK)</option>
+                            <option value="AZ">Arizona (AZ)</option>
+                            <option value="AR">Arkansas (AR)</option>
+                            <option value="CA">California (CA)</option>
+                            <option value="CO">Colorado (CO)</option>
+                            <option value="CT">Connecticut (CT)</option>
+                            <option value="DE">Delaware (DE)</option>
+                            <option value="DC">District Of Columbia (DC)</option>
+                            <option value="FL">Florida (FL)</option>
+                            <option value="GA">Georgia (GA)</option>
+                            <option value="HI">Hawaii (HI)</option>
+                            <option value="ID">Idaho (ID)</option>
+                            <option value="IL">Illinois (IL)</option>
+                            <option value="IN">Indiana (IN)</option>
+                            <option value="IA">Iowa (IA)</option>
+                            <option value="KS">Kansas (KS)</option>
+                            <option value="KY">Kentucky (KY)</option>
+                            <option value="LA">Louisiana (LA)</option>
+                            <option value="ME">Maine (ME)</option>
+                            <option value="MD">Maryland (MD)</option>
+                            <option value="MA">Massachusetts (MA)</option>
+                            <option value="MI">Michigan (MI)</option>
+                            <option value="MN">Minnesota (MN)</option>
+                            <option value="MS">Mississippi (MS)</option>
+                            <option value="MO">Missouri (MO)</option>
+                            <option value="MT">Montana (MT)</option>
+                            <option value="NE">Nebraska (NE)</option>
+                            <option value="NV">Nevada (NV)</option>
+                            <option value="NH">New Hampshire (NH)</option>
+                            <option value="NJ">New Jersey (NJ)</option>
+                            <option value="NM">New Mexico (NM)</option>
+                            <option value="NY">New York (NY)</option>
+                            <option value="NC">North Carolina (NC)</option>
+                            <option value="ND">North Dakota (ND)</option>
+                            <option value="OH">Ohio (OH)</option>
+                            <option value="OK">Oklahoma (OK)</option>
+                            <option value="OR">Oregon (OR)</option>
+                            <option value="PA">Pennsylvania (PA)</option>
+                            <option value="RI">Rhode Island (RI)</option>
+                            <option value="SC">South Carolina (SC)</option>
+                            <option value="SD">South Dakota (SD)</option>
+                            <option value="TN">Tennessee (TN)</option>
+                            <option value="TX">Texas (TX)</option>
+                            <option value="UT">Utah (UT)</option>
+                            <option value="VT">Vermont (VT)</option>
+                            <option value="VA">Virginia (VA)</option>
+                            <option value="WA">Washington (WA)</option>
+                            <option value="WV">West Virginia (WV)</option>
+                            <option value="WI">Wisconsin (WI)</option>
+                            <option value="WY">Wyoming (WY)</option>
+                        </select>
+                        <label for="floatingSelect">State</label>
+                    </div>
+                </div>
+                <div class="col-3">
+                    <div class="form-floating mb-3">
+                        @Html.EditorFor(model => model.addressModel.zip, new { htmlAttributes = new { @class = "form-control", @placeholder = "Zip Code" } })
+                        @Html.ValidationMessageFor(model => model.addressModel.zip, "", new { @class = "text-danger" })
+                        <label for="floatingInput">Zip Code</label>
+                    </div>
                 </div>
             </div>
-            <div class="col-5">
-                <div class="form-floating mb-3">
-                    <select class="form-select" id="companyState" name="companyState" required>
-                        <option disabled selected>State</option>
-                        <option value="AL">Alabama (AL)</option>
-                        <option value="AK">Alaska (AK)</option>
-                        <option value="AZ">Arizona (AZ)</option>
-                        <option value="AR">Arkansas (AR)</option>
-                        <option value="CA">California (CA)</option>
-                        <option value="CO">Colorado (CO)</option>
-                        <option value="CT">Connecticut (CT)</option>
-                        <option value="DE">Delaware (DE)</option>
-                        <option value="DC">District Of Columbia (DC)</option>
-                        <option value="FL">Florida (FL)</option>
-                        <option value="GA">Georgia (GA)</option>
-                        <option value="HI">Hawaii (HI)</option>
-                        <option value="ID">Idaho (ID)</option>
-                        <option value="IL">Illinois (IL)</option>
-                        <option value="IN">Indiana (IN)</option>
-                        <option value="IA">Iowa (IA)</option>
-                        <option value="KS">Kansas (KS)</option>
-                        <option value="KY">Kentucky (KY)</option>
-                        <option value="LA">Louisiana (LA)</option>
-                        <option value="ME">Maine (ME)</option>
-                        <option value="MD">Maryland (MD)</option>
-                        <option value="MA">Massachusetts (MA)</option>
-                        <option value="MI">Michigan (MI)</option>
-                        <option value="MN">Minnesota (MN)</option>
-                        <option value="MS">Mississippi (MS)</option>
-                        <option value="MO">Missouri (MO)</option>
-                        <option value="MT">Montana (MT)</option>
-                        <option value="NE">Nebraska (NE)</option>
-                        <option value="NV">Nevada (NV)</option>
-                        <option value="NH">New Hampshire (NH)</option>
-                        <option value="NJ">New Jersey (NJ)</option>
-                        <option value="NM">New Mexico (NM)</option>
-                        <option value="NY">New York (NY)</option>
-                        <option value="NC">North Carolina (NC)</option>
-                        <option value="ND">North Dakota (ND)</option>
-                        <option value="OH">Ohio (OH)</option>
-                        <option value="OK">Oklahoma (OK)</option>
-                        <option value="OR">Oregon (OR)</option>
-                        <option value="PA">Pennsylvania (PA)</option>
-                        <option value="RI">Rhode Island (RI)</option>
-                        <option value="SC">South Carolina (SC)</option>
-                        <option value="SD">South Dakota (SD)</option>
-                        <option value="TN">Tennessee (TN)</option>
-                        <option value="TX">Texas (TX)</option>
-                        <option value="UT">Utah (UT)</option>
-                        <option value="VT">Vermont (VT)</option>
-                        <option value="VA">Virginia (VA)</option>
-                        <option value="WA">Washington (WA)</option>
-                        <option value="WV">West Virginia (WV)</option>
-                        <option value="WI">Wisconsin (WI)</option>
-                        <option value="WY">Wyoming (WY)</option>
-                    </select>
-                    <label for="floatingSelect">State</label>
-                </div>
+            <div class="form-floating mb-3">
+                @Html.EditorFor(model => model.addressModel.country, new { htmlAttributes = new { @class = "form-control", @placeholder = "Country / Territory" } })
+                @Html.ValidationMessageFor(model => model.addressModel.country, "", new { @class = "text-danger" })
+                <label for="floatingInput">Country / Territory</label>
             </div>
-            <div class="col-3">
-                <div class="form-floating mb-3">
-                    @Html.EditorFor(model => model.zipCode, new { htmlAttributes = new { @class = "form-control", @placeholder = "Zip Code" } })
-                    @Html.ValidationMessageFor(model => model.zipCode, "", new { @class = "text-danger" })
-                    <label for="floatingInput">Zip Code</label>
-                </div>
+            <span class="input-group-text" id="basic-addon1">Country Code: USA (+1)</span>
+            <div class="form-floating mb-3">
+                @Html.EditorFor(model => model.businessModel.phone, new { htmlAttributes = new { @class = "form-control", @placeholder = "Phone" } })
+                @Html.ValidationMessageFor(model => model.businessModel.phone, "", new { @class = "text-danger" })
+                <label for="floatingInput">Phone</label>
             </div>
-        </div>
-        <div class="form-floating mb-3">
-            @Html.EditorFor(model => model.country, new { htmlAttributes = new { @class = "form-control", @placeholder = "Country / Territory" } })
-            @Html.ValidationMessageFor(model => model.country, "", new { @class = "text-danger" })
-            <label for="floatingInput">Country / Territory</label>
-        </div>
-        <span class="input-group-text" id="basic-addon1">Country Code: USA (+1)</span>
-        <div class="form-floating mb-3">
-            @Html.EditorFor(model => model.phone, new { htmlAttributes = new { @class = "form-control", @placeholder = "Phone" } })
-            @Html.ValidationMessageFor(model => model.phone, "", new { @class = "text-danger" })
-            <label for="floatingInput">Phone</label>
-        </div>
-        <div class="form-floating mb-5">
-            @Html.EditorFor(model => model.companyEmail, new { htmlAttributes = new { @class = "form-control", @placeholder = "Company Email" } })
-            @Html.ValidationMessageFor(model => model.companyEmail, "", new { @class = "text-danger" })
-            <label for="floatingInput">Company Email</label>
-        </div>
-        <input type="submit" value="Next: Login Details" , class="btn btn-lg btn-outline-primary mt-2" />
+            <div class="form-floating mb-5">
+                @Html.EditorFor(model => model.businessModel.companyEmail, new { htmlAttributes = new { @class = "form-control", @placeholder = "Company Email" } })
+                @Html.ValidationMessageFor(model => model.businessModel.companyEmail, "", new { @class = "text-danger" })
+                <label for="floatingInput">Company Email</label>
+            </div>
+            <input type="submit" value="Next: Login Details" , class="btn btn-lg btn-outline-primary mt-2" />
 
-        <a class="btn btn-lg btn-outline-danger mt-2" href="~/Registration" role="button">Back: Account Type</a>
-    </form>
+            <a class="btn btn-lg btn-outline-danger mt-2" href="~/Registration" role="button">Back: Account Type</a>
+        </form>
     }
     <!--<a class="btn btn-lg btn-outline-danger mt-2" href="~/Registration" role="button">Back: Account Type</a>
     <a class="btn btn-lg btn-outline-primary mt-2" href="~/Registration/BusinessStep3" role="button">
         Next: Login Details
     </a>-->
 </div>
+
+
 
 
