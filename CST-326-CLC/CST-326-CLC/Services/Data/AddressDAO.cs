@@ -52,6 +52,45 @@ namespace CST_326_CLC.Services.Data
 
         public AddressModel ViewAddress(int addressID)
         {
+            SqlConnection conn = new SqlConnection(WebConfigurationManager.ConnectionStrings["myConn"].ConnectionString);
+            string addressQuery = "SELECT * FROM dbo.Address WHERE ADDRESS_ID = @ID";
+            SqlCommand command = new SqlCommand(addressQuery, conn);
+
+            try
+            {
+                command.Parameters.Add("@ID", SqlDbType.Int).Value = addressID;
+                conn.Open();
+
+                SqlDataReader reader = command.ExecuteReader();
+                if(reader.HasRows)
+                {
+                    while(reader.Read())
+                    {
+                        AddressModel model = new AddressModel();
+                        model.addressID = reader.GetInt32(0);
+                        model.address = reader.GetString(2);
+                        if(!reader.IsDBNull(3))
+                        {
+                            model.aptSuite = reader.GetString(3);
+                        }
+                        model.city = reader.GetString(4);
+                        model.state = reader.GetString(5);
+                        model.zip = reader.GetInt32(6);
+                        model.country = reader.GetString(7);
+
+                        return model;
+                    }
+                }
+            }
+            catch (SqlException e)
+            {
+                Log.Information("ShipmentDAO: There was an SQL exception when retrieving shipmentID: {0}", addressID);
+                Debug.WriteLine(String.Format("Error generated: {0} - {1}", e.GetType(), e.Message));
+            }
+            finally
+            {
+                conn.Close();
+            }
             return null;
         }
 

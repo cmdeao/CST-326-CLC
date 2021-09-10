@@ -14,7 +14,7 @@ namespace CST_326_CLC.Controllers
         {
             Log.Information("Navigating to Index View");
 
-            return View();
+            return View("IndexNEW");
         }
         
         public ActionResult About()
