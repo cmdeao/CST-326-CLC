@@ -154,6 +154,7 @@ namespace CST_326_CLC.Services.Data
 
         public bool NewShipmentTest(ShipmentInformation model)
         {
+            Log.Information("ShipmentDAO: Performing Insertion transaction for a new shipment into the database.");
             SqlConnection conn = new SqlConnection(WebConfigurationManager.ConnectionStrings["myConn"].ConnectionString);
             conn.Open();
             SqlCommand command = conn.CreateCommand();
@@ -265,6 +266,7 @@ namespace CST_326_CLC.Services.Data
             }
             catch (SqlException e)
             {
+                Log.Information("ShipmentDAO: An error occurred while inserting a new shipment");
                 Debug.WriteLine(e.GetType());
                 Debug.WriteLine(e.Message);
                 try
@@ -288,6 +290,7 @@ namespace CST_326_CLC.Services.Data
 
         public ShipmentInformation RetrieveShipmentInformation(int shipmentID)
         {
+            Log.Information("ShipmentDAO: Retrieving shipment from database with shipmentID: {0}", shipmentID);
             SqlConnection conn = new SqlConnection(WebConfigurationManager.ConnectionStrings["myConn"].ConnectionString);
             string shipmentQuery = "SELECT * FROM dbo.Shipment WHERE Shipment_ID = @ShipmentID";
             SqlCommand command = new SqlCommand(shipmentQuery, conn);
@@ -345,5 +348,85 @@ namespace CST_326_CLC.Services.Data
             return null;
         }
 
+        public List<ShipmentInformation> ViewAllShipments()
+        {
+            Log.Information("ShipmentDAO: Retrieving all shipments from the database.");
+            SqlConnection conn = new SqlConnection(WebConfigurationManager.ConnectionStrings["myConn"].ConnectionString);
+            string retriveQuery =
+                "SELECT * FROM dbo.Shipment S " +
+                "JOIN dbo.Address A ON S.Address_ID = A.ADDRESS_ID " +
+                "JOIN dbo.Address B ON S.Recipient_Address_ID = B.ADDRESS_ID";
+            SqlCommand command = new SqlCommand(retriveQuery, conn);
+            List<ShipmentInformation> retrievedShipments = new List<ShipmentInformation>();
+
+            try
+            {
+                conn.Open();
+                SqlDataReader reader = command.ExecuteReader();
+
+                if (reader.HasRows)
+                { 
+                    while(reader.Read())
+                    {
+                        
+                        ShipmentModel shipment = new ShipmentModel();
+                        shipment.ShipmentId = reader.GetInt32(0);
+                        shipment.Status = reader.GetString(4);
+                        shipment.PackageSize = reader.GetString(5);
+                        shipment.Weight = reader.GetInt32(6);
+                        shipment.Height = reader.GetInt32(7);
+                        shipment.Width = reader.GetInt32(8);
+                        shipment.Length = reader.GetInt32(9);
+                        shipment.IsPackageStandard = Convert.ToBoolean((int)reader.GetSqlByte(10));
+                        shipment.DeliveryOption = reader.GetString(11);
+                        shipment.IsResidential = Convert.ToBoolean((int)reader.GetSqlByte(12));
+
+                        AddressModel senderAddress = new AddressModel();
+                        senderAddress.addressID = reader.GetInt32(13);
+                        senderAddress.userID = reader.GetInt32(14);
+                        senderAddress.address = reader.GetString(15);
+                        if(!reader.IsDBNull(16))
+                        {
+                            senderAddress.aptSuite = reader.GetString(16);
+                        }
+                        senderAddress.city = reader.GetString(17);
+                        senderAddress.state = reader.GetString(18);
+                        senderAddress.zip = reader.GetInt32(19);
+                        senderAddress.country = reader.GetString(20);
+
+                        AddressModel recipientAddress = new AddressModel();
+                        recipientAddress.addressID = reader.GetInt32(21);
+                        recipientAddress.userID = reader.GetInt32(22);
+                        recipientAddress.address = reader.GetString(23);
+                        if (!reader.IsDBNull(24))
+                        {
+                            recipientAddress.aptSuite = reader.GetString(24);
+                        }
+                        recipientAddress.city = reader.GetString(25);
+                        recipientAddress.state = reader.GetString(26);
+                        recipientAddress.zip = reader.GetInt32(27);
+                        recipientAddress.country = reader.GetString(28);
+
+                        ShipmentInformation shipmentInfo = new ShipmentInformation();
+                        shipmentInfo.shipment = shipment;
+                        shipmentInfo.sender = senderAddress;
+                        shipmentInfo.recipient = recipientAddress;
+                        retrievedShipments.Add(shipmentInfo);
+                    }
+                }
+
+                return retrievedShipments;
+            }
+            catch (SqlException e)
+            {
+                Log.Information("ShipmentDAO: There was an SQL exception when retrieving shipments");
+                Debug.WriteLine(String.Format("Error generated: {0} - {1}", e.GetType(), e.Message));
+            }
+            finally
+            {
+                conn.Close();
+            }
+            return null;
+        }
     }
 }

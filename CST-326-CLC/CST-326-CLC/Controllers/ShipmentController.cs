@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Serilog;
+using System.Diagnostics;
 
 namespace CST_326_CLC.Controllers
 {
@@ -26,8 +27,6 @@ namespace CST_326_CLC.Controllers
             ShipmentInformation retrievedShipment = service.RetrieveNewShipment(shipmentID);
 
             return View("ViewShipmentV2", retrievedShipment);
-            //ShipmentModel retrievedShipment = service.ViewShipment(shipmentID);
-            //return View("ViewShipmentTEST", retrievedShipment);
         }
 
         [HttpPost]

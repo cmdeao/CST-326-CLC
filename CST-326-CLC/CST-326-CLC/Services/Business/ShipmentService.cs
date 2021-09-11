@@ -30,6 +30,11 @@ namespace CST_326_CLC.Services.Business
             return service.DeleteShipment(shipmentID);
         }
 
+        public List<ShipmentInformation> RetrieveAllShipments()
+        {
+            return service.ViewAllShipments();
+        }
+
         public bool TestNewShipment(ShipmentInformation model)
         {
             return service.NewShipmentTest(model);

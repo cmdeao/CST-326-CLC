@@ -9,6 +9,7 @@ namespace CST_326_CLC.Models
     public class AddressModel
     {
         public int addressID { get; set; }
+        public int userID { get; set; }
 
         public string aptSuite { get; set; }
 
