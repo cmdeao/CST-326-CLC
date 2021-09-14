@@ -32,7 +32,6 @@ namespace CST_326_CLC.Models
         public string DeliveryOption { get; set; }
         // Business prices should be higher
         public bool IsResidential { get; set; }
-
         
         public decimal CalculateCost(int zip, int length, int width, int height, int weight,
             string deliveryOption)

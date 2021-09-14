@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Serilog;
+using System.Diagnostics;
 
 namespace CST_326_CLC.Controllers
 {
@@ -23,8 +24,9 @@ namespace CST_326_CLC.Controllers
         {
             Log.Information("Shipment: User is attempting to view shipment by shipmentID: {0}", shipmentID);
             ShipmentService service = new ShipmentService();
-            ShipmentModel retrievedShipment = service.ViewShipment(shipmentID);
-            return View("ViewShipmentTEST", retrievedShipment);
+            ShipmentInformation retrievedShipment = service.RetrieveNewShipment(shipmentID);
+
+            return View("ViewShipmentV2", retrievedShipment);
         }
 
         [HttpPost]
@@ -57,6 +59,28 @@ namespace CST_326_CLC.Controllers
         }
 
         [HttpPost]
+        public ActionResult ShipmentTEST(ShipmentInformation model, string senderState, string recipientState)
+        {
+            model.shipment.Status = "Shipped";
+            model.shipment.PackageSize = "Medium";
+            model.shipment.IsPackageStandard = true;
+            model.shipment.DeliveryOption = "Standard";
+            model.shipment.IsResidential = true;
+            model.sender.state = senderState;
+            model.recipient.state = recipientState;
+
+            ShipmentService service = new ShipmentService();
+            if (service.TestNewShipment(model))
+            {
+                return Content("SUCCESS");
+            }
+            else
+            {
+                return Content("FAILED");
+            }
+        }
+
+        [HttpPost]
         public ActionResult RemoveShipment(int shipmentID)
         {
             Log.Information("User is attempting to remove a shipment...");
@@ -73,5 +97,12 @@ namespace CST_326_CLC.Controllers
                 return Content(String.Format("Failed to remove shipment: {0}", shipmentID));
             }
         }
+    }
+
+    public class ShipmentInformation
+    {
+        public ShipmentModel shipment { get; set; }
+        public AddressModel sender { get; set; }
+        public AddressModel recipient { get; set; }
     }
 }

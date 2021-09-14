@@ -1,0 +1,113 @@
+﻿@model CST_326_CLC.Controllers.ShipmentInformation
+
+@{
+    ViewBag.Title = "ViewShipmentTEST";
+}
+
+<h2>ViewShipmentTEST</h2>
+
+<div>
+    <h4>ShipmentModel</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.shipment.ShipmentId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.shipment.ShipmentId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.shipment.Status)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.shipment.Status)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.shipment.PackageSize)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.shipment.PackageSize)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.shipment.Weight)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.shipment.Weight)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.shipment.Height)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.shipment.Height)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.shipment.Width)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.shipment.Width)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.shipment.Length)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.shipment.Length)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.shipment.IsPackageStandard)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.shipment.IsPackageStandard)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.shipment.DeliveryOption)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.shipment.DeliveryOption)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.shipment.IsResidential)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.shipment.IsResidential)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.sender.address)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.sender.address)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.sender.aptSuite)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.sender.aptSuite)
+        </dd>
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

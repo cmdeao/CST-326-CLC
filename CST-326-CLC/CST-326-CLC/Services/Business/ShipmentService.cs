@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using Serilog;
+using CST_326_CLC.Controllers;
 
 namespace CST_326_CLC.Services.Business
 {
@@ -27,6 +28,21 @@ namespace CST_326_CLC.Services.Business
         {
             Log.Information("ShipmentService: Deleting shipment for shipmentID: {0}", shipmentID);
             return service.DeleteShipment(shipmentID);
+        }
+
+        public List<ShipmentInformation> RetrieveAllShipments()
+        {
+            return service.ViewAllShipments();
+        }
+
+        public bool TestNewShipment(ShipmentInformation model)
+        {
+            return service.NewShipmentTest(model);
+        }
+
+        public ShipmentInformation RetrieveNewShipment(int shipmentID)
+        {
+            return service.RetrieveShipmentInformation(shipmentID);
         }
     }
 }
