@@ -1,0 +1,129 @@
+﻿@model IEnumerable<CST_326_CLC.Controllers.ShipmentInformation>
+
+
+@{
+    ViewBag.Title = "ViewAllShipments";
+}
+
+<h2>ViewAllShipments</h2>
+
+<style>
+    table, td, th {
+        text-align: center;
+        font-weight: bold;
+    }
+</style>
+
+<table id="myTable" class="table table-bordered table-responsive table-hover" style="width: 250px;">
+    <thead>
+        <tr>
+            <th>Shipment ID</th>
+            <th>Status</th>
+            <th>Package Size</th>
+            <th>Weight</th>
+            <th>Height</th>
+            <th>Width</th>
+            <th>Length</th>
+            <th>Standard Package</th>
+            <th>Delivery Option</th>
+            <th>Residential</th>
+            <th>Sender Address</th>
+            <th>Sender Apt/Suite</th>
+            <th>Sender City</th>
+            <th>Sender State</th>
+            <th>Sender Zip Code</th>
+            <th>Sender Country</th>
+
+            <th>Recipient Address</th>
+            <th>Recipient Apt/Suite</th>
+            <th>Recipient City</th>
+            <th>Recipient State</th>
+            <th>Recipient Zip Code</th>
+            <th>Recipient Country</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                @item.shipment.ShipmentId
+            </td>
+            <td>
+                @item.shipment.Status
+            </td>
+            <td>
+                @item.shipment.PackageSize
+            </td>
+            <td>
+                @item.shipment.Weight
+            </td>
+            <td>
+                @item.shipment.Height
+            </td>
+            <td>
+                @item.shipment.Width
+            </td>
+            <td>
+                @item.shipment.Length
+            </td>
+            <td>
+                @item.shipment.IsPackageStandard
+            </td>
+            <td>
+                @item.shipment.DeliveryOption
+            </td>
+            <td>
+                @item.shipment.IsResidential
+            </td>
+            <td>
+                @item.sender.address
+            </td>
+            <td>
+                @item.sender.aptSuite
+            </td>
+            <td>
+                @item.sender.city
+            </td>
+            <td>
+                @item.sender.state
+            </td>
+            <td>
+                @item.sender.zip
+            </td>
+            <td>
+                @item.sender.country
+            </td>
+
+            <td>
+                @item.recipient.address
+            </td>
+            <td>
+                @item.recipient.aptSuite
+            </td>
+            <td>
+                @item.recipient.city
+            </td>
+            <td>
+                @item.recipient.state
+            </td>
+            <td>
+                @item.recipient.zip
+            </td>
+            <td>
+                @item.recipient.country
+            </td>
+        </tr>
+        }
+
+
+
+    </tbody>
+</table>
+@section Scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#myTable').DataTable();
+        });
+    </script>
+}

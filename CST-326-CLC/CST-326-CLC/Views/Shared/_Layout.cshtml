@@ -13,6 +13,8 @@
     <meta name="theme-color" content="#ffffff">
     <script src="https://use.fontawesome.com/releases/v5.15.1/js/all.js"></script>
 
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.css">
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
@@ -33,7 +35,7 @@
             </ul>
 
 
-            
+
             <div class="col-md-3 text-end dropdown">
                 <button class="btn btn-white dropdown-toggle" type="button" id="dropdownMenuButton"
                         data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -57,9 +59,9 @@
                         <a class="dropdown-item text-center" href="~/Registration">No Account? Sign up</a>
                         <a class="dropdown-item text-center" href="#">Forgot password?</a>
                     }
-                    </div>
+                </div>
             </div>
-            
+
         </header>
     </nav>
 
@@ -73,6 +75,13 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj"
             crossorigin="anonymous"></script>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.js"></script>
+
+    @RenderSection("scripts", required: false)
 </body>
 
 </html>

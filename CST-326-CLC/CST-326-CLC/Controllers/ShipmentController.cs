@@ -16,7 +16,20 @@ namespace CST_326_CLC.Controllers
         public ActionResult Index()
         {
             Log.Information("Navigating to View Shipments...");
+
+            //THESE LINES ARE FOR TESTING PURPOSES ONLY! THEY WILL BE RELOCATED SOON.
+            //ShipmentService service = new ShipmentService();
+            //List<ShipmentInformation> shipments = new List<ShipmentInformation>();
+            //shipments = service.RetrieveAllShipments();
+            //return View("ViewAllShipments", shipments);
+
+            
             return View("SearchShipments");
+        }
+
+        public ActionResult ViewAllShipments()
+        {
+            return View("ViewAllShipments");
         }
 
         [HttpPost]

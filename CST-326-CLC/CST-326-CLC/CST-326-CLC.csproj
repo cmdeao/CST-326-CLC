@@ -208,6 +208,8 @@
     <Content Include="Views\Registration\BusinessStep3.cshtml" />
     <Content Include="Views\Home\IndexNEW.cshtml" />
     <Content Include="Views\Shipment\ViewShipmentV2.cshtml" />
+    <Content Include="Views\Shipment\ViewAllShipments.cshtml" />
+    <Content Include="Views\Shipment\Test.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
