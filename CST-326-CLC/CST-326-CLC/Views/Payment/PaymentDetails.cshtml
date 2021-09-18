@@ -1,0 +1,169 @@
+﻿@using CST_326_CLC.Models
+@model  CST_326_CLC.Controllers.PaymentInformation
+
+@{
+    ViewBag.Title = "PaymentDetails";
+}
+
+<!-- Order Details -->
+<!-- Show the shipment details that the user filled out on the Shipment forms then r
+    right below this show the Payment amount: Details below -->
+<!-- Payment Amount -->
+<section class="text-light text-center">
+    <div class="container-fluid " style="background-color: #36B878 ">
+        <!-- Display html label with cost of current shipment in large numbers-->
+    </div>
+</section>
+<!-- Billing Address Form -->
+<section class="text-light text-center">
+    <div class="container-fluid " style="background-color: #042967 ">
+        <!-- ReRoute to PaymentControler -->
+        <br /><br />
+        @using (Html.BeginForm("ProcessPayment", "Payment", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+            <div id="BillingAdressForm" class="container-fluid">
+                <h2 class="text-light">Billing Address</h2>
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="floatingInput" placeholder="First Name">
+                    <label for="floatingInput">First Name</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="floatingInput" placeholder="Last Name">
+                    <label for="floatingInput">Last Name</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <!--<input type="text" class="form-control" id="floatingInput" placeholder="Address">-->
+                    @Html.EditorFor(model => model.Billing.address, new { htmlAttributes = new { @class = "form-control", @placeholder = "Address" } })
+                    @Html.ValidationMessageFor(model => model.Billing.address, "", new { @class = "text-danger" })
+                    <label for="floatingInput">Address</label>
+                </div>
+                <div class="form-floating mb-3">
+                    @Html.EditorFor(model => model.Billing.aptSuite, new { htmlAttributes = new { @class = "form-control", @placeholder = "Apt / Suite (Optional)" } })
+                    @Html.ValidationMessageFor(model => model.Billing.aptSuite, "", new { @class = "text-danger" })
+                    <label for="floatingInput">Apt/ Suite (Optional)</label>
+                </div>
+                <div class="row">
+                    <div class="col-4">
+                        <div class="form-floating mb-3">
+                            @Html.EditorFor(model => model.Billing.city, new { htmlAttributes = new { @class = "form-control", @placeholder = "City" } })
+                            @Html.ValidationMessageFor(model => model.Billing.city, "", new { @class = "text-danger" })
+                            <label for="floatingInput">City</label>
+                        </div>
+                    </div>
+                    <div class="col-5">
+                        <div class="form-floating mb-3">
+                            <select class="form-select" id="senderState" name="senderState" required>
+                                <option disabled selected>State</option>
+                                <option value="AL">Alabama (AL)</option>
+                                <option value="AK">Alaska (AK)</option>
+                                <option value="AZ">Arizona (AZ)</option>
+                                <option value="AR">Arkansas (AR)</option>
+                                <option value="CA">California (CA)</option>
+                                <option value="CO">Colorado (CO)</option>
+                                <option value="CT">Connecticut (CT)</option>
+                                <option value="DE">Delaware (DE)</option>
+                                <option value="DC">District Of Columbia (DC)</option>
+                                <option value="FL">Florida (FL)</option>
+                                <option value="GA">Georgia (GA)</option>
+                                <option value="HI">Hawaii (HI)</option>
+                                <option value="ID">Idaho (ID)</option>
+                                <option value="IL">Illinois (IL)</option>
+                                <option value="IN">Indiana (IN)</option>
+                                <option value="IA">Iowa (IA)</option>
+                                <option value="KS">Kansas (KS)</option>
+                                <option value="KY">Kentucky (KY)</option>
+                                <option value="LA">Louisiana (LA)</option>
+                                <option value="ME">Maine (ME)</option>
+                                <option value="MD">Maryland (MD)</option>
+                                <option value="MA">Massachusetts (MA)</option>
+                                <option value="MI">Michigan (MI)</option>
+                                <option value="MN">Minnesota (MN)</option>
+                                <option value="MS">Mississippi (MS)</option>
+                                <option value="MO">Missouri (MO)</option>
+                                <option value="MT">Montana (MT)</option>
+                                <option value="NE">Nebraska (NE)</option>
+                                <option value="NV">Nevada (NV)</option>
+                                <option value="NH">New Hampshire (NH)</option>
+                                <option value="NJ">New Jersey (NJ)</option>
+                                <option value="NM">New Mexico (NM)</option>
+                                <option value="NY">New York (NY)</option>
+                                <option value="NC">North Carolina (NC)</option>
+                                <option value="ND">North Dakota (ND)</option>
+                                <option value="OH">Ohio (OH)</option>
+                                <option value="OK">Oklahoma (OK)</option>
+                                <option value="OR">Oregon (OR)</option>
+                                <option value="PA">Pennsylvania (PA)</option>
+                                <option value="RI">Rhode Island (RI)</option>
+                                <option value="SC">South Carolina (SC)</option>
+                                <option value="SD">South Dakota (SD)</option>
+                                <option value="TN">Tennessee (TN)</option>
+                                <option value="TX">Texas (TX)</option>
+                                <option value="UT">Utah (UT)</option>
+                                <option value="VT">Vermont (VT)</option>
+                                <option value="VA">Virginia (VA)</option>
+                                <option value="WA">Washington (WA)</option>
+                                <option value="WV">West Virginia (WV)</option>
+                                <option value="WI">Wisconsin (WI)</option>
+                                <option value="WY">Wyoming (WY)</option>
+                            </select>
+                            <label for="floatingSelect">State</label>
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="form-floating mb-3">
+                            @Html.EditorFor(model => model.Billing.zip, new { htmlAttributes = new { @class = "form-control", @placeholder = "Zip" } })
+                            @Html.ValidationMessageFor(model => model.Billing.zip, "", new { @class = "text-danger" })
+                            <label for="floatingInput">Zip Code</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-floating mb-3">
+                    @Html.EditorFor(model => model.Billing.country, new { htmlAttributes = new { @class = "form-control", @placeholder = "Country / Territory" } })
+                    @Html.ValidationMessageFor(model => model.Billing.country, "", new { @class = "text-danger" })
+                    <label for="floatingInput">Country / Territory</label>
+                </div>
+            </div>
+
+            <!-- Payment Details Form -->
+            @Html.AntiForgeryToken()
+            <div id="BillingAdressForm" class="container-fluid">
+                <h2 class="text-light">Card Details:</h2>
+                <div class="form-floating mb-3">
+                    <!--<input type="text" class="form-control" id="floatingInput" placeholder="Address">-->
+                    @Html.EditorFor(model => model.CreditCard.cardHolderName, new { htmlAttributes = new { @class = "form-control", @placeholder = "Card Holder Name" } })
+                    @Html.ValidationMessageFor(model => model.CreditCard.cardHolderName, "", new { @class = "text-danger" })
+                    <label for="floatingInput">Card Holder Name</label>
+                </div>
+                <div class="form-floating mb-3">
+                    @Html.EditorFor(model => model.CreditCard.cardNumber, new { htmlAttributes = new { @class = "form-control", @placeholder = "Card Number" } })
+                    @Html.ValidationMessageFor(model => model.CreditCard.cardNumber, "", new { @class = "text-danger" })
+                    <label for="floatingInput">Card Number</label>
+                </div>
+                <div class="row">
+                    <div class="col-4">
+                        <div class="form-floating mb-3">
+                            @Html.EditorFor(model => model.CreditCard.expirationMonth, new { htmlAttributes = new { @class = "form-control", @placeholder = "City" } })
+                            @Html.ValidationMessageFor(model => model.CreditCard.expirationMonth, "", new { @class = "text-danger" })
+                            <label for="floatingInput">Expiration Month</label>
+                        </div>
+                    </div>
+                    <div class="col-5">
+                        <div class="form-floating mb-3">
+                            @Html.DropDownListFor(m => m.CreditCard.cardType, new SelectList(Enum.GetValues(typeof(CreditCardModel.CardType))), "Select Card Type", new { @class = "form-select" })
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="form-floating mb-3">
+                            @Html.EditorFor(model => model.CreditCard.cvvCode, new { htmlAttributes = new { @class = "form-control", @placeholder = "CVV Code" } })
+                            @Html.ValidationMessageFor(model => model.CreditCard.cvvCode, "", new { @class = "text-danger" })
+                            <label for="floatingInput">CVV Code</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <input type="submit" value="Submit Payment" , class="btn btn-lg btn-outline-primary mt-2" />
+            <br /><br />
+        }
+    </div>
+</section>

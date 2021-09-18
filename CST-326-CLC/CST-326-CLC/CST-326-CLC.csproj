@@ -139,6 +139,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\PaymentController.cs" />
     <Compile Include="Controllers\RegistrationController.cs" />
     <Compile Include="Controllers\ShipmentController.cs" />
     <Compile Include="Global.asax.cs">
@@ -210,6 +211,7 @@
     <Content Include="Views\Shipment\ViewShipmentV2.cshtml" />
     <Content Include="Views\Shipment\ViewAllShipments.cshtml" />
     <Content Include="Views\Shipment\Test.cshtml" />
+    <Content Include="Views\Payment\PaymentDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
