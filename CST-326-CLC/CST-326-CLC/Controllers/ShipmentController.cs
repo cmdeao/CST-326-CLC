@@ -23,7 +23,43 @@ namespace CST_326_CLC.Controllers
             //shipments = service.RetrieveAllShipments();
             //return View("ViewAllShipments", shipments);
 
-            
+            //CreditService service = new CreditService();
+            //CreditCardModel model = new CreditCardModel();
+
+            //model.cardHolderName = "Cameron Deao";
+            //model.cardType = CreditCardModel.CardType.Visa;
+            //model.cardNumber = 1234123412341234;
+            //model.cvvCode = 123;
+            //model.expirationMonth = 12;
+            //model.expirationYear = 12;
+
+            //if(service.StoreCreditCard(model, 8))
+            //{
+            //    Debug.WriteLine("SUCCESS!");
+            //}
+            //else
+            //{
+            //    Debug.WriteLine("FAILED!");
+            //}
+
+            //PaymentService service = new PaymentService();
+            //Dictionary<int, decimal> transactions = new Dictionary<int, decimal>();
+            //transactions = service.RetrieveTransactions();
+
+            //foreach(KeyValuePair<int, decimal> ele in transactions)
+            //{
+            //    Debug.WriteLine("{0} and {1}", ele.Key, ele.Value);
+            //}
+
+            //if(service.CreateTransaction(7, 12.34M))
+            //{
+            //    Debug.WriteLine("SUCCESS!");
+            //}
+            //else
+            //{
+            //    Debug.WriteLine("FAILED");
+            //}
+
             return View("SearchShipments");
         }
 

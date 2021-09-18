@@ -156,9 +156,13 @@
     <Compile Include="Models\UserModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\Business\AddressService.cs" />
+    <Compile Include="Services\Business\CreditService.cs" />
+    <Compile Include="Services\Business\PaymentService.cs" />
     <Compile Include="Services\Business\SecurityService.cs" />
     <Compile Include="Services\Business\ShipmentService.cs" />
     <Compile Include="Services\Data\AddressDAO.cs" />
+    <Compile Include="Services\Data\CreditDAO.cs" />
+    <Compile Include="Services\Data\PaymentDAO.cs" />
     <Compile Include="Services\Data\SecurityDAO.cs" />
     <Compile Include="Services\Data\ShipmentDAO.cs" />
   </ItemGroup>
