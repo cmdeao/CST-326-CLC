@@ -58,6 +58,8 @@ namespace CST_326_CLC.Services.Business
 
         public BusinessRegistration _businessRegistration { get; set; } = null;
 
+        public ShipmentInformation _currentShipment { get; set; } = null;
+        public int shipmentInsert { get; set; } = 0;
         public UserManagement()
         {
 

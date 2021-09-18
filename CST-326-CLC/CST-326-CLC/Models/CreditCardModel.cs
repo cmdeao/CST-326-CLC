@@ -23,7 +23,6 @@ namespace CST_326_CLC.Models
         public CardType cardType { get; set; }
 
         [Required(ErrorMessage = "The Card Number field is required.")]
-        [StringLength(16, ErrorMessage = "Invalid card numbers entered", MinimumLength = 15)]
         public long cardNumber { get; set; }
 
         [Required(ErrorMessage = "The CVV Code field is required.")]

@@ -1,4 +1,6 @@
 ﻿using CST_326_CLC.Models;
+using CST_326_CLC.Services.Business;
+using Serilog;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,38 +16,58 @@ namespace CST_326_CLC.Controllers
         {
             return View("PaymentDetails");
         }
+
+        /* Refactor to work with payment form */
+
+        [HttpPost]
+        public ActionResult ProcessPayment(PaymentInformation model)
+        {
+            Log.Information("User attempting to create shipment...");
+
+            ShipmentInformation shipmentInfo = null;
+            CreditService creditService = new CreditService();
+
+            if(!creditService.CheckCard(model.CreditCard))
+            {
+                creditService.StoreCreditCard(model.CreditCard, 8);
+            }
+
+            if(creditService.ProcessCard(model.CreditCard.cardNumber))
+            {
+                shipmentInfo = UserManagement.Instance._currentShipment;
+            }
+            else
+            {
+                return View("Error");
+            }
+
+            decimal shipmentCost = shipmentInfo.shipment.CalculateCost(shipmentInfo.recipient.zip, shipmentInfo.shipment.Length, shipmentInfo.shipment.Width,
+                shipmentInfo.shipment.Height, shipmentInfo.shipment.Weight, shipmentInfo.shipment.DeliveryOption);
+            
+            ShipmentService shipmentService = new ShipmentService();
+            if(shipmentService.TestNewShipment(shipmentInfo))
+            {
+                PaymentService paymentService = new PaymentService();
+                int shipmentID = UserManagement.Instance.shipmentInsert;
+                if (paymentService.CreateTransaction(UserManagement.Instance.shipmentInsert, shipmentCost))
+                {
+                    UserManagement.Instance.shipmentInsert = 0;
+                    UserManagement.Instance._currentShipment = null;
+                    return Content(String.Format("Created shipment: {0} Total cost: {1}", shipmentID, shipmentCost));
+                }
+                else
+                {
+                    UserManagement.Instance.shipmentInsert = 0;
+                    UserManagement.Instance._currentShipment = null;
+                    return Content(String.Format("Failed to create shipment: {0}", shipmentID));
+                }
+            }
+            else
+            {
+                return View("Error");
+            }
+        }
     }
-
-    /* Refactor to work with payment form */
-
-    //[HttpPost]
-    //public ActionResult ProcessPayment(ShipmentModel model)
-    //{
-    //    Log.Information("User attempting to create shipment...");
-
-    //    // Can be used to display cost to user
-    //    decimal shipmentCost = model.CalculateCost(model.Zip, model.Length, model.Width,
-    //        model.Height, model.Weight, model.DeliveryOption);
-
-    //    if (!ModelState.IsValid)
-    //    {
-    //        Log.Information("Create Shipment: The ModelState was invalid.");
-    //        return View("ShipmentIndexTEST");
-    //    }
-
-    //    ShipmentService service = new ShipmentService();
-
-    //    if (service.AddShipment(model))
-    //    {
-    //        Log.Information("Create Shipment: Shipment succesfully created ID: {0}", model.ShipmentId);
-    //        return Content(String.Format("Created shipment: {0}", model.ShipmentId));
-    //    }
-    //    else
-    //    {
-    //        Log.Information("Create Shipment: Failed to create the shipment.");
-    //        return Content(String.Format("Failed to create shipment: {0}", model.ShipmentId));
-    //    }
-    //}
 
     public class PaymentInformation
     {

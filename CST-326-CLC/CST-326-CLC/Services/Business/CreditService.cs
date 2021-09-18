@@ -20,9 +20,14 @@ namespace CST_326_CLC.Services.Business
             return service.RetrieveCards(userID);
         }
 
-        public bool CheckCard(long cardNumber)
+        public bool ProcessCard(long cardNumber)
         {
-            return service.CheckCard(cardNumber);
+            return service.ProcessCard(cardNumber);
+        }
+
+        public bool CheckCard(CreditCardModel model)
+        {
+            return service.CheckCard(model);
         }
     }
 }

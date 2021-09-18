@@ -245,7 +245,7 @@ namespace CST_326_CLC.Services.Data
 
                 command.CommandText = "INSERT INTO dbo.Shipment(User_ID, Address_ID, Recipient_Address_ID, Status, PackageSize, Weight, " +
                 "Height, Width, Length, Packaging, Delivery_Options, Is_Residential) VALUES (@userID, @addressID, @recipientID, @status, " +
-                "@packageSize, @weight, @height, @width, @length, @packaging, @delivery, @residential)";
+                "@packageSize, @weight, @height, @width, @length, @packaging, @delivery, @residential); SELECT SCOPE_IDENTITY();";
 
                 command.Parameters.Add("@userID", SqlDbType.Int).Value = 3011;
                 command.Parameters.Add("@addressID", SqlDbType.Int).Value = sentAddressID;
@@ -259,9 +259,11 @@ namespace CST_326_CLC.Services.Data
                 command.Parameters.Add("@packaging", SqlDbType.TinyInt).Value = model.shipment.IsPackageStandard;
                 command.Parameters.Add("@delivery", SqlDbType.NVarChar, 100).Value = model.shipment.DeliveryOption;
                 command.Parameters.Add("@residential", SqlDbType.TinyInt).Value = model.shipment.IsResidential;
-                command.ExecuteNonQuery();
+                //command.ExecuteNonQuery();
+                int shipmentID = Convert.ToInt32(command.ExecuteScalar());
 
                 transaction.Commit();
+                UserManagement.Instance.shipmentInsert = shipmentID;
                 return true;
             }
             catch (SqlException e)

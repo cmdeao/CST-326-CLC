@@ -118,15 +118,18 @@ namespace CST_326_CLC.Controllers
             model.sender.state = senderState;
             model.recipient.state = recipientState;
 
-            ShipmentService service = new ShipmentService();
-            if (service.TestNewShipment(model))
-            {
-                return Content("SUCCESS");
-            }
-            else
-            {
-                return Content("FAILED");
-            }
+            UserManagement.Instance._currentShipment = model;
+            return RedirectToAction("Index", "Payment");
+
+            //ShipmentService service = new ShipmentService();
+            //if (service.TestNewShipment(model))
+            //{
+            //    return Content("SUCCESS");
+            //}
+            //else
+            //{
+            //    return Content("FAILED");
+            //}
         }
 
         [HttpPost]

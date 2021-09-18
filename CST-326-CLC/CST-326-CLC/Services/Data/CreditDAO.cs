@@ -102,9 +102,9 @@ namespace CST_326_CLC.Services.Data
             return null;
         }
 
-        public bool CheckCard(long cardNumber)
+        public bool ProcessCard(long cardNumber)
         {
-            Log.Information("CreditDAO: Checking card for {0}", cardNumber);
+            Log.Information("CreditDAO: Processing card for {0}", cardNumber);
 
             SqlConnection conn = new SqlConnection(WebConfigurationManager.ConnectionStrings["myConn"].ConnectionString);
             string query = "SELECT * FROM dbo.Credit WHERE CARD_NUMBER = @Number";
@@ -144,6 +144,42 @@ namespace CST_326_CLC.Services.Data
             catch (SqlException e)
             {
                 Log.Information("CreditDAO: There was an SQL exception when checking card {0}.", cardNumber);
+                Debug.WriteLine(String.Format("Error generated: {0} - {1}", e.GetType(), e.Message));
+            }
+            finally
+            {
+                conn.Close();
+            }
+            return false;
+        }
+    
+        public bool CheckCard(CreditCardModel model)
+        {
+            Log.Information("CreditDAO: Checking card for {0}", model.cardNumber);
+
+            SqlConnection conn = new SqlConnection(WebConfigurationManager.ConnectionStrings["myConn"].ConnectionString);
+            string query = "SELECT * FROM dbo.Credit WHERE CARD_NUMBER = @Number";
+            SqlCommand command = new SqlCommand(query, conn);
+
+            try
+            {
+                command.Parameters.Add(new SqlParameter("@Number", SqlDbType.BigInt)).Value = model.cardNumber;
+                conn.Open();
+
+                SqlDataReader reader = command.ExecuteReader();
+
+                if(reader.HasRows)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (SqlException e)
+            {
+                Log.Information("CreditDAO: There was an SQL exception when checking card {0}.", model.cardNumber);
                 Debug.WriteLine(String.Format("Error generated: {0} - {1}", e.GetType(), e.Message));
             }
             finally

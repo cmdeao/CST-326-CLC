@@ -26,29 +26,28 @@
                 <h2 class="text-light">Billing Address</h2>
                 <div class="form-floating mb-3">
                     <input type="text" class="form-control" id="floatingInput" placeholder="First Name">
-                    <label for="floatingInput">First Name</label>
+                    <label for="floatingInput" style="color:black">First Name</label>
                 </div>
                 <div class="form-floating mb-3">
                     <input type="text" class="form-control" id="floatingInput" placeholder="Last Name">
-                    <label for="floatingInput">Last Name</label>
+                    <label for="floatingInput" style="color:black">Last Name</label>
                 </div>
                 <div class="form-floating mb-3">
-                    <!--<input type="text" class="form-control" id="floatingInput" placeholder="Address">-->
                     @Html.EditorFor(model => model.Billing.address, new { htmlAttributes = new { @class = "form-control", @placeholder = "Address" } })
                     @Html.ValidationMessageFor(model => model.Billing.address, "", new { @class = "text-danger" })
-                    <label for="floatingInput">Address</label>
+                    <label for="floatingInput" style="color:black">Address</label>
                 </div>
                 <div class="form-floating mb-3">
                     @Html.EditorFor(model => model.Billing.aptSuite, new { htmlAttributes = new { @class = "form-control", @placeholder = "Apt / Suite (Optional)" } })
                     @Html.ValidationMessageFor(model => model.Billing.aptSuite, "", new { @class = "text-danger" })
-                    <label for="floatingInput">Apt/ Suite (Optional)</label>
+                    <label for="floatingInput" style="color:black">Apt/ Suite (Optional)</label>
                 </div>
                 <div class="row">
                     <div class="col-4">
                         <div class="form-floating mb-3">
                             @Html.EditorFor(model => model.Billing.city, new { htmlAttributes = new { @class = "form-control", @placeholder = "City" } })
                             @Html.ValidationMessageFor(model => model.Billing.city, "", new { @class = "text-danger" })
-                            <label for="floatingInput">City</label>
+                            <label for="floatingInput" style="color:black">City</label>
                         </div>
                     </div>
                     <div class="col-5">
@@ -114,14 +113,14 @@
                         <div class="form-floating mb-3">
                             @Html.EditorFor(model => model.Billing.zip, new { htmlAttributes = new { @class = "form-control", @placeholder = "Zip" } })
                             @Html.ValidationMessageFor(model => model.Billing.zip, "", new { @class = "text-danger" })
-                            <label for="floatingInput">Zip Code</label>
+                            <label for="floatingInput" style="color:black">Zip Code</label>
                         </div>
                     </div>
                 </div>
                 <div class="form-floating mb-3">
                     @Html.EditorFor(model => model.Billing.country, new { htmlAttributes = new { @class = "form-control", @placeholder = "Country / Territory" } })
                     @Html.ValidationMessageFor(model => model.Billing.country, "", new { @class = "text-danger" })
-                    <label for="floatingInput">Country / Territory</label>
+                    <label for="floatingInput" style="color:black">Country / Territory</label>
                 </div>
             </div>
 
@@ -130,34 +129,41 @@
             <div id="BillingAdressForm" class="container-fluid">
                 <h2 class="text-light">Card Details:</h2>
                 <div class="form-floating mb-3">
-                    <!--<input type="text" class="form-control" id="floatingInput" placeholder="Address">-->
                     @Html.EditorFor(model => model.CreditCard.cardHolderName, new { htmlAttributes = new { @class = "form-control", @placeholder = "Card Holder Name" } })
                     @Html.ValidationMessageFor(model => model.CreditCard.cardHolderName, "", new { @class = "text-danger" })
-                    <label for="floatingInput">Card Holder Name</label>
+                    <label for="floatingInput" style="color:black">Card Holder Name</label>
                 </div>
                 <div class="form-floating mb-3">
                     @Html.EditorFor(model => model.CreditCard.cardNumber, new { htmlAttributes = new { @class = "form-control", @placeholder = "Card Number" } })
                     @Html.ValidationMessageFor(model => model.CreditCard.cardNumber, "", new { @class = "text-danger" })
-                    <label for="floatingInput">Card Number</label>
+                    <label for="floatingInput" style="color:black">Card Number</label>
                 </div>
                 <div class="row">
-                    <div class="col-4">
+
+                    <div class="col-6">
                         <div class="form-floating mb-3">
-                            @Html.EditorFor(model => model.CreditCard.expirationMonth, new { htmlAttributes = new { @class = "form-control", @placeholder = "City" } })
+                            @Html.DropDownListFor(m => m.CreditCard.expirationMonth, new SelectList(Enumerable.Range(1, 12)), new { @class = "form-select" })
                             @Html.ValidationMessageFor(model => model.CreditCard.expirationMonth, "", new { @class = "text-danger" })
-                            <label for="floatingInput">Expiration Month</label>
+                            <label for="floatingInput" style="color:black">Expiration Month</label>
                         </div>
                     </div>
-                    <div class="col-5">
+                    <div class="col-6">
+                        <div class="form-floating mb-3">
+                            @Html.DropDownListFor(m => m.CreditCard.expirationYear, new SelectList(Enumerable.Range(2000, 26)), new { @class = "form-select" })
+                            @Html.ValidationMessageFor(model => model.CreditCard.expirationYear, "", new { @class = "text-danger" })
+                            <label for="floatingInput" style="color:black">Expiration Year</label>
+                        </div>
+                    </div>
+                    <div class="col-6">
                         <div class="form-floating mb-3">
                             @Html.DropDownListFor(m => m.CreditCard.cardType, new SelectList(Enum.GetValues(typeof(CreditCardModel.CardType))), "Select Card Type", new { @class = "form-select" })
                         </div>
                     </div>
-                    <div class="col-3">
+                    <div class="col-6">
                         <div class="form-floating mb-3">
                             @Html.EditorFor(model => model.CreditCard.cvvCode, new { htmlAttributes = new { @class = "form-control", @placeholder = "CVV Code" } })
                             @Html.ValidationMessageFor(model => model.CreditCard.cvvCode, "", new { @class = "text-danger" })
-                            <label for="floatingInput">CVV Code</label>
+                            <label for="floatingInput" style="color:black">CVV Code</label>
                         </div>
                     </div>
                 </div>
